@@ -1,0 +1,28 @@
+.ingredient_section {
+    max-width: 600px;
+}
+.ingredient_ul {
+    max-width: 600px;
+    height: calc(100vh - 346px);
+    overflow-y: scroll; 
+    list-style: none;
+    margin: 0;
+    padding: 0;  
+}
+.ingredient_ul::-webkit-scrollbar {
+    width: 12px;
+  }
+  .ingredient_ul::-webkit-scrollbar-track {
+    background: #2f2f37;
+  }
+  .ingredient_ul::-webkit-scrollbar-thumb {
+    background: #8585ad;
+    border: 3px solid #2f2f37;
+    border-radius: 6px;
+  }
+
+  .ingredient_li {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+  }
