@@ -1,0 +1,10 @@
+.ingredient_card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 277px;
+    position: relative;
+}
+.ingredient_text {
+ text-align: center;
+}
