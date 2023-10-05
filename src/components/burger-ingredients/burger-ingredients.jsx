@@ -1,12 +1,32 @@
 import { Tab } from '@ya.praktikum/react-developer-burger-ui-components'
-import React from 'react'
+import React, { useEffect, useRef } from 'react'
 import Ingredient from '../ingredient/ingredient'
 import style from './burger-ingredients.module.css'
+import PropTypes from "prop-types";
+import { ingredientPropType } from "../../utils/prop-types";
+import { useInView } from 'react-intersection-observer';
 
-function BurgerIngredients({ingredients, setIsClickIngridient, setIsModalOpen, setIsItemImage}) {
+function BurgerIngredients({ ingredients, setIsClickIngridient, setIsModalOpen }) {
 
   const [current, setCurrent] = React.useState('one')
 
+  const bunRef = useRef(null);
+  const sauseRef = useRef(null);
+  const mainRef = useRef(null);
+
+  const [bunTabRef, inViewBun] = useInView({ threshold: 0 });
+  const [sauseTabRef, inViewSause] = useInView({ threshold: 0 });
+  const [mainTabRef, inViewMain] = useInView({ threshold: 0 });
+
+  useEffect(() => {
+    if (inViewBun) {
+      setCurrent("one");
+    } else if (inViewSause) {
+      setCurrent("two");
+    } else if (inViewMain) {
+      setCurrent("three");
+    }
+  }, [inViewBun, inViewSause, inViewMain]);
 
   return (
     <section className={style.ingredient_section}>
@@ -24,30 +44,31 @@ function BurgerIngredients({ingredients, setIsClickIngridient, setIsModalOpen, s
       </div>
 
       <ul className={style.ingredient_ul}>
-      <h2 className="text text_type_main-medium mb-6 mt-10">Булки</h2>
-        <li className={style.ingredient_li}>
+        <h2 className="text text_type_main-medium mb-6 mt-10" ref={bunTabRef}>Булки</h2>
+        <li className={style.ingredient_li} ref={bunRef}>
           {ingredients.map(item => {
             if (item.type === "bun") {
+
               return (
-                <Ingredient key={item._id} ingredient={item} setIsClickIngridient={setIsClickIngridient} setIsModalOpen={setIsModalOpen} setIsItemImage={setIsItemImage}/>)
+                <Ingredient key={item.unicId} ingredient={item} setIsClickIngridient={setIsClickIngridient} setIsModalOpen={setIsModalOpen} />)
             }
           })}
         </li>
-        <h2 className="text text_type_main-medium mb-6 mt-10">Соусы</h2>
-        <li className={style.ingredient_li}>
+        <h2 className="text text_type_main-medium mb-6 mt-10" ref={sauseTabRef}>Соусы</h2>
+        <li className={style.ingredient_li} ref={sauseRef}>
           {ingredients.map(item => {
             if (item.type === "sauce") {
               return (
-                <Ingredient key={item._id} ingredient={item} setIsClickIngridient={setIsClickIngridient} setIsModalOpen={setIsModalOpen} setIsItemImage={setIsItemImage}/>)
+                <Ingredient key={item.unicId} ingredient={item} setIsClickIngridient={setIsClickIngridient} setIsModalOpen={setIsModalOpen} />)
             }
           })}
         </li>
-        <h2 className="text text_type_main-medium mb-6 mt-10">Начинки</h2>
-        <li className={style.ingredient_li}>
+        <h2 className="text text_type_main-medium mb-6 mt-10" ref={mainTabRef}>Начинки</h2>
+        <li className={style.ingredient_li} ref={mainRef}>
           {ingredients.map(item => {
             if (item.type === "main") {
               return (
-                <Ingredient key={item._id} ingredient={item} setIsClickIngridient={setIsClickIngridient} setIsModalOpen={setIsModalOpen} setIsItemImage={setIsItemImage}/>)
+                <Ingredient key={item.unicId} ingredient={item} setIsClickIngridient={setIsClickIngridient} setIsModalOpen={setIsModalOpen} />)
             }
           })}
         </li>
@@ -56,5 +77,10 @@ function BurgerIngredients({ingredients, setIsClickIngridient, setIsModalOpen, s
     </section>
   )
 }
+
+BurgerIngredients.propTypes = {
+  ingredients: PropTypes.arrayOf(ingredientPropType).isRequired
+};
+
 
 export default BurgerIngredients

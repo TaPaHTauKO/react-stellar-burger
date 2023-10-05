@@ -1,0 +1,1 @@
+export const orderSelectorNumber = (store) => store.order.orderNumber
