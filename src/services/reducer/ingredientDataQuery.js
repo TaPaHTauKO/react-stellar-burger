@@ -9,11 +9,9 @@ export const fetchIngredientData = createAsyncThunk(
 
             const res = await fetch(`${baseUrl}/ingredients`)
 
-                .then(checkResponse)
+            const responseData = await checkResponse(res)
 
-            return res.data;
-
-
+            return thunkApi.fulfillWithValue(responseData.data)
         }
         catch (err) {
             return thunkApi.rejectWithValue('Ошибка')

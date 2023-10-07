@@ -10,22 +10,18 @@ const modalRoot = document.getElementById('modal')
 
 
 
-function Modal({ children, setIsClickIngridient, setIsClickOrderList }) {
+function Modal({ children, closeModalCb }) {
 
-    const { closeModal } = useModal();
 
     const onClick = () => {
-        closeModal()
-        setIsClickOrderList(false)
-        setIsClickIngridient(false)
+        closeModalCb()
     }
+    
 
     React.useEffect(() => {
         function onEsc(evt) {
             if (evt.code === 'Escape') {
-                closeModal()
-                setIsClickOrderList(false)
-                setIsClickIngridient(false)
+                closeModalCb()           
             }
         }
 
@@ -57,8 +53,7 @@ function Modal({ children, setIsClickIngridient, setIsClickOrderList }) {
 
 Modal.propTypes = {
     children: any,
-    setIsClickIngridient: func,
-    setIsClickOrderList: func
+    closeModalCb: func,
   }
 
 export default Modal

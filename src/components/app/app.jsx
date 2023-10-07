@@ -25,11 +25,15 @@ function App() {
   const isDataIngredients = useSelector(ingredientDataSelector);
 
   const createModal = () => {
-    
+
     return (
       <Modal
-        setIsClickIngridient={setIsClickIngridient}
-        setIsClickOrderList={setIsClickOrderList}
+        closeModalCb={() => {
+          setIsClickIngridient(false)
+          setIsClickOrderList(false)
+        }
+        }
+
       >
         {isClickIngridient && <IngredientDetails /> || isClickOrderList && <OrderDetails />}
       </Modal>

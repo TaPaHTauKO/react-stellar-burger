@@ -14,15 +14,14 @@ export const postOrderQuery = createAsyncThunk(
                         "Content-Type": "application/json",
 
                     },
-                    body: JSON.stringify({"ingredients": obj})
+                    body: JSON.stringify({ "ingredients": obj })
                 })
-                .then(checkResponse)
-            return res
-               
+            const responseData = await checkResponse(res)
+
+            return thunkApi.fulfillWithValue(responseData)
+
         } catch (err) {
-            return thunkApi.rejectWithValue('Ошибка')
+            return thunkApi.rejectWithValue(err || 'Ошибка при получении данных')
         }
-
-
     }
 )
