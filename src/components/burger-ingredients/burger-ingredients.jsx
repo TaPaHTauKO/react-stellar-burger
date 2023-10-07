@@ -2,11 +2,14 @@ import { Tab } from '@ya.praktikum/react-developer-burger-ui-components'
 import React, { useEffect, useRef } from 'react'
 import Ingredient from '../ingredient/ingredient'
 import style from './burger-ingredients.module.css'
-import PropTypes from "prop-types";
-import { ingredientPropType } from "../../utils/prop-types";
+import PropTypes, { func } from "prop-types";
 import { useInView } from 'react-intersection-observer';
+import { useSelector } from 'react-redux';
+import { ingredientDataSelector } from '../../services/selectors/ingredientDataSelector';
 
-function BurgerIngredients({ ingredients, setIsClickIngridient, setIsModalOpen }) {
+function BurgerIngredients({ setIsClickIngridient }) {
+
+  const ingredients = useSelector(ingredientDataSelector)
 
   const [current, setCurrent] = React.useState('one')
 
@@ -50,7 +53,7 @@ function BurgerIngredients({ ingredients, setIsClickIngridient, setIsModalOpen }
             if (item.type === "bun") {
 
               return (
-                <Ingredient key={item.unicId} ingredient={item} setIsClickIngridient={setIsClickIngridient} setIsModalOpen={setIsModalOpen} />)
+                <Ingredient key={item._id} ingredient={item} setIsClickIngridient={setIsClickIngridient} />)
             }
           })}
         </li>
@@ -59,7 +62,7 @@ function BurgerIngredients({ ingredients, setIsClickIngridient, setIsModalOpen }
           {ingredients.map(item => {
             if (item.type === "sauce") {
               return (
-                <Ingredient key={item.unicId} ingredient={item} setIsClickIngridient={setIsClickIngridient} setIsModalOpen={setIsModalOpen} />)
+                <Ingredient key={item._id} ingredient={item} setIsClickIngridient={setIsClickIngridient} />)
             }
           })}
         </li>
@@ -68,7 +71,7 @@ function BurgerIngredients({ ingredients, setIsClickIngridient, setIsModalOpen }
           {ingredients.map(item => {
             if (item.type === "main") {
               return (
-                <Ingredient key={item.unicId} ingredient={item} setIsClickIngridient={setIsClickIngridient} setIsModalOpen={setIsModalOpen} />)
+                <Ingredient key={item._id} ingredient={item} setIsClickIngridient={setIsClickIngridient} />)
             }
           })}
         </li>
@@ -79,8 +82,7 @@ function BurgerIngredients({ ingredients, setIsClickIngridient, setIsModalOpen }
 }
 
 BurgerIngredients.propTypes = {
-  ingredients: PropTypes.arrayOf(ingredientPropType).isRequired
-};
-
+  setIsClickOrderList: func
+}
 
 export default BurgerIngredients

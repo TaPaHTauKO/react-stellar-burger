@@ -4,11 +4,15 @@ import { useDrop } from 'react-dnd'
 import { useDispatch, useSelector } from 'react-redux';
 import { addIngredient, deleteIngredient, sortIngredients } from '../../services/reducer/constructorIngredientSlise';
 import { constructorIngredientSelector } from '../../services/selectors/constructorIngredientSelector';
-import { DragableComponent } from '../dragableComponent/dragableComponent';
+import { DragableComponent } from '../dragableComponent/dragable-Component';
 import { postOrderQuery } from '../../services/reducer/orderQuery';
+import { useModal } from '../../hooks/useModal';
+import { func } from 'prop-types';
 
-function BurgerConstructor({ setIsModalOpen, setIsClickOrderList }) {
+function BurgerConstructor({ setIsClickOrderList }) {
 
+
+  const { openModal } = useModal();
 
   const dispatch = useDispatch()
 
@@ -36,7 +40,7 @@ function BurgerConstructor({ setIsModalOpen, setIsClickOrderList }) {
   const ingrId = ingredients.map((e) => e._id)
 
   const onClick = () => {
-    setIsModalOpen(true)
+    openModal()
     setIsClickOrderList(true)
     dispatch(postOrderQuery(ingrId))
   };
@@ -135,6 +139,10 @@ function BurgerConstructor({ setIsModalOpen, setIsClickOrderList }) {
 
     </section>
   )
+}
+
+BurgerConstructor.propTypes = {
+  setIsClickOrderList: func.isRequired
 }
 
 export default BurgerConstructor

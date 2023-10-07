@@ -1,7 +1,8 @@
+import { any, func, number, string } from "prop-types";
 import { useRef } from "react";
 import { useDrag, useDrop } from "react-dnd";
 
-export function DragableComponent({ el, children, moveIngredients, index }) {
+export function DragableComponent({ children, moveIngredients, index }) {
 
     const ref = useRef(null)
     const [{ isDragging }, drag] = useDrag({
@@ -61,4 +62,10 @@ export function DragableComponent({ el, children, moveIngredients, index }) {
     return (
         <div ref={ref}>{children}</div>
     )
+}
+
+DragableComponent.propTypes = {
+    children: any.isRequired,
+    index: number.isRequired,
+    moveIngredients: func.isRequired
 }

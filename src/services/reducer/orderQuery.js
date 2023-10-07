@@ -1,4 +1,6 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
+import { baseUrl, checkResponse } from "../../utils/api";
+
 
 
 export const postOrderQuery = createAsyncThunk(
@@ -6,17 +8,16 @@ export const postOrderQuery = createAsyncThunk(
     async (obj, thunkApi) => {
         try {
             const res = await
-                fetch('https://norma.nomoreparties.space/api/orders', {
+                fetch(`${baseUrl}/orders`, {
                     method: 'POST',
                     headers: {
                         "Content-Type": "application/json",
 
                     },
                     body: JSON.stringify({"ingredients": obj})
-                });
-            const data = await res.json()
-            console.log(data);
-            return data
+                })
+                .then(checkResponse)
+            return res
                
         } catch (err) {
             return thunkApi.rejectWithValue('Ошибка')

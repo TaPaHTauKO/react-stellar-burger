@@ -9,39 +9,34 @@ import IngredientDetails from "../ingredient-details/ingredient-details";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchIngredientData } from "../../services/reducer/ingredientDataQuery";
 import { ingredientDataSelector } from "../../services/selectors/ingredientDataSelector";
-import { selectIngredientSelector } from "../../services/selectors/selectIngredientSelector";
+
 
 
 
 function App() {
 
-  const [isModalOpen, setIsModalOpen] = useState(false);
   const [isClickIngridient, setIsClickIngridient] = useState(false);
   const [isClickOrderList, setIsClickOrderList] = useState(false);
 
   const dispatch = useDispatch();
 
-
   useEffect(() => dispatch(fetchIngredientData()), [])
 
   const isDataIngredients = useSelector(ingredientDataSelector);
 
-  const selectIngredinet = useSelector(selectIngredientSelector);
-
-  if (isDataIngredients.length < 1) return null
-
   const createModal = () => {
+    
     return (
       <Modal
-        setIsModalOpen={setIsModalOpen}
         setIsClickIngridient={setIsClickIngridient}
         setIsClickOrderList={setIsClickOrderList}
       >
-        {isClickIngridient && <IngredientDetails selectIngredinet={selectIngredinet} /> || isClickOrderList && <OrderDetails />}
+        {isClickIngridient && <IngredientDetails /> || isClickOrderList && <OrderDetails />}
       </Modal>
     )
   }
 
+  if (isDataIngredients.length < 1) return null
 
   return (
     <div className={styles.app}>
@@ -51,19 +46,18 @@ function App() {
       <main className={styles.main + ' ml-5 mr-5'}>
 
         <BurgerIngredients
-          ingredients={isDataIngredients}
           setIsClickIngridient={setIsClickIngridient}
-          setIsModalOpen={setIsModalOpen}
         />
 
         <BurgerConstructor
-          setIsModalOpen={setIsModalOpen}
           setIsClickOrderList={setIsClickOrderList}
         />
 
-        {isModalOpen && (
+        {(isClickIngridient || isClickOrderList) && (
           <>
-            {createModal()}</>)}
+            {createModal()}
+
+          </>)}
 
       </main>
     </div>

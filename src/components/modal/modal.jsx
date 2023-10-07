@@ -3,15 +3,19 @@ import React from 'react'
 import ReactDOM from 'react-dom';
 import ModalOverlay from '../modal-overlay/modal-overlay';
 import style from './modal.module.css'
+import { useModal } from '../../hooks/useModal';
+import { any, func } from 'prop-types';
 
 const modalRoot = document.getElementById('modal')
 
 
 
-function Modal({ setIsModalOpen, children, setIsClickIngridient, setIsClickOrderList }) {
+function Modal({ children, setIsClickIngridient, setIsClickOrderList }) {
+
+    const { closeModal } = useModal();
 
     const onClick = () => {
-        setIsModalOpen(false)
+        closeModal()
         setIsClickOrderList(false)
         setIsClickIngridient(false)
     }
@@ -19,7 +23,7 @@ function Modal({ setIsModalOpen, children, setIsClickIngridient, setIsClickOrder
     React.useEffect(() => {
         function onEsc(evt) {
             if (evt.code === 'Escape') {
-                setIsModalOpen(false)
+                closeModal()
                 setIsClickOrderList(false)
                 setIsClickIngridient(false)
             }
@@ -51,6 +55,10 @@ function Modal({ setIsModalOpen, children, setIsClickIngridient, setIsClickOrder
         modalRoot)
 }
 
-
+Modal.propTypes = {
+    children: any,
+    setIsClickIngridient: func,
+    setIsClickOrderList: func
+  }
 
 export default Modal

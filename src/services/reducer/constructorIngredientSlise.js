@@ -1,4 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit"
+import uuid from "react-uuid"
 
 const initialState = {
     ingredientInBurger: []
@@ -8,13 +9,19 @@ const constructorIngredientSlise = createSlice({
     name: 'ingredientInBurger',
     initialState,
     reducers: {
-        addIngredient: (state, action) => {
-            const foundBun = state.ingredientInBurger.findIndex(item => (item.type === 'bun') && (item.type === action.payload.type))
+        addIngredient:{
+            reducer: (state,action) => {
+                const foundBun = state.ingredientInBurger.findIndex(item => (item.type === 'bun') && (item.type === action.payload.type))
             if (foundBun >= 0) {
                 state.ingredientInBurger.splice(foundBun, 1, action.payload)
 
             } else {
                 state.ingredientInBurger = [...state.ingredientInBurger, action.payload];
+            }
+            },
+            prepare: (el) => {
+                const unicId = uuid()
+                return { payload: {...el, unicId} }
             }
         },
 

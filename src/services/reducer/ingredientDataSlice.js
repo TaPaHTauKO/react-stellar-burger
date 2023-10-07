@@ -1,5 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit"
 import { fetchIngredientData } from "./ingredientDataQuery";
+import uuid from "react-uuid";
 
 const initialState = {
     ingredientData: [],
@@ -12,7 +13,7 @@ const ingredientDataSlice = createSlice({
     initialState,
     extraReducers:{
         [fetchIngredientData.fulfilled.type]:(state, action) => {
-            state.ingredientData = action.payload;
+            state.ingredientData = action.payload
             state.isLoading = false;
             state.error = '';  
         },
