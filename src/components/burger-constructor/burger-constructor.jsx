@@ -4,7 +4,7 @@ import { useDrop } from 'react-dnd'
 import { useDispatch, useSelector } from 'react-redux';
 import { addIngredient, deleteIngredient, sortIngredients } from '../../services/reducer/constructorIngredientSlise';
 import { constructorIngredientSelector } from '../../services/selectors/constructorIngredientSelector';
-import { DragableComponent } from '../dragableComponent/dragable-Component';
+import { DragableComponent } from '../dragable-component/dragable-component';
 import { postOrderQuery } from '../../services/reducer/orderQuery';
 import { useModal } from '../../hooks/useModal';
 import { func } from 'prop-types';
