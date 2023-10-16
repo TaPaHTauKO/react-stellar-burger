@@ -1,6 +1,11 @@
 .ingredient_section {
     max-width: 600px;
 }
+
+.ingredient_tabs {
+  display: flex;
+}
+
 .ingredient_ul {
     max-width: 600px;
     height: calc(100vh - 346px);
