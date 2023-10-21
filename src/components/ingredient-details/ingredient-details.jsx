@@ -2,11 +2,20 @@ import React from 'react'
 import style from './ingredient-details.module.css'
 import { useSelector } from 'react-redux';
 import { selectIngredientSelector } from '../../services/selectors/selectIngredientSelector';
+import { useParams } from 'react-router-dom'
 
 function IngredientDetails() {
 
+    const ingredients = useSelector((store)=> store.ingredientData.ingredientData);
 
-   const selectIngredinet =  useSelector(selectIngredientSelector)
+    const {id} = useParams();
+
+
+     const selectIngredinet = ingredients.find((item) => item._id === id)
+
+   if ( ingredients.length <= 0){
+    return null
+   }else{
 
     return (
         <div className={style.ingredient_details_container}>
@@ -34,7 +43,7 @@ function IngredientDetails() {
             </ul>
 
         </div>
-    )
+    )}
 }
 
 export default IngredientDetails

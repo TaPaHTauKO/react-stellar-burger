@@ -6,8 +6,9 @@ import PropTypes, { func } from "prop-types";
 import { useInView } from 'react-intersection-observer';
 import { useSelector } from 'react-redux';
 import { ingredientDataSelector } from '../../services/selectors/ingredientDataSelector';
+import { Link, useLocation } from "react-router-dom";
 
-function BurgerIngredients({ setIsClickIngridient }) {
+function BurgerIngredients() {
 
   const ingredients = useSelector(ingredientDataSelector)
 
@@ -20,6 +21,8 @@ function BurgerIngredients({ setIsClickIngridient }) {
   const [bunTabRef, inViewBun] = useInView({ threshold: 0 });
   const [sauseTabRef, inViewSause] = useInView({ threshold: 0 });
   const [mainTabRef, inViewMain] = useInView({ threshold: 0 });
+
+  const location = useLocation()
 
   useEffect(() => {
     if (inViewBun) {
@@ -53,7 +56,14 @@ function BurgerIngredients({ setIsClickIngridient }) {
             if (item.type === "bun") {
 
               return (
-                <Ingredient key={item._id} ingredient={item} setIsClickIngridient={setIsClickIngridient} />)
+                <Link to={`/ingredients/${item._id}`}
+                  className={style.ingredient__link}
+                  key={item._id}
+                  state={{ background: location }}>
+
+                  <Ingredient ingredient={item} />
+
+                </Link>)
             }
           })}
         </li>
@@ -62,7 +72,14 @@ function BurgerIngredients({ setIsClickIngridient }) {
           {ingredients.map(item => {
             if (item.type === "sauce") {
               return (
-                <Ingredient key={item._id} ingredient={item} setIsClickIngridient={setIsClickIngridient} />)
+                <Link to={`/ingredients/${item._id}`}
+                  className={style.ingredient__link}
+                  key={item._id}
+                  state={{ background: location }}>
+
+                  <Ingredient ingredient={item} />
+
+                </Link>)
             }
           })}
         </li>
@@ -71,7 +88,15 @@ function BurgerIngredients({ setIsClickIngridient }) {
           {ingredients.map(item => {
             if (item.type === "main") {
               return (
-                <Ingredient key={item._id} ingredient={item} setIsClickIngridient={setIsClickIngridient} />)
+                <Link to={`/ingredients/${item._id}`}
+                  className={style.ingredient__link}
+                  key={item._id}
+                  state={{ background: location }}>
+
+                  <Ingredient key={item._id} ingredient={item} />
+
+                </Link>
+              )
             }
           })}
         </li>

@@ -31,3 +31,8 @@
     flex-wrap: wrap;
     justify-content: space-around;
   }
+
+  .ingredient__link{
+    text-decoration: none;
+    color: white;
+  }

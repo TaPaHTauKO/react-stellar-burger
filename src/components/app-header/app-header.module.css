@@ -2,6 +2,8 @@
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
     justify-items: center;
+    background-color: #2f2f37;
+    align-items: center;
 }
 .header_link {
     display: flex;
