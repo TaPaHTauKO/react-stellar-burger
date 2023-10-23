@@ -1,0 +1,7 @@
+.forms_buttons{
+    display: flex;
+    justify-content: end;
+}
+.cansel_button {
+    cursor: pointer;
+}

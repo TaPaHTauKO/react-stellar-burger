@@ -7,14 +7,16 @@ import { constructorIngredientSelector } from '../../services/selectors/construc
 import { DragableComponent } from '../dragable-component/dragable-component';
 import { postOrderQuery } from '../../services/reducer/orderQuery';
 import { useModal } from '../../hooks/useModal';
-import { func } from 'prop-types';
+import { Link, useLocation, useNavigate } from "react-router-dom";
 
-function BurgerConstructor({ setIsClickOrderList }) {
+function BurgerConstructor() {
 
 
   const { openModal } = useModal();
 
   const dispatch = useDispatch()
+  const location = useLocation()
+  const navigate = useNavigate();
 
   const [, dropRef] = useDrop({
     accept: 'ingred',
@@ -24,6 +26,7 @@ function BurgerConstructor({ setIsClickOrderList }) {
   })
 
   const ingredients = useSelector(constructorIngredientSelector);
+  const user = useSelector((store) => store.user.user)
 
   const moveIngredients = (dragIndex, hoverIndex) => {
 
@@ -39,10 +42,14 @@ function BurgerConstructor({ setIsClickOrderList }) {
 
   const ingrId = ingredients.map((e) => e._id)
 
-  const onClick = () => {
+  const onClick = () => { if (user !== null) {
+
     openModal()
-    setIsClickOrderList(true)
     dispatch(postOrderQuery(ingrId))
+  }
+  else {
+    navigate('/login')
+  }
   };
 
 
@@ -131,8 +138,10 @@ function BurgerConstructor({ setIsClickOrderList }) {
           <CurrencyIcon type="primary" />
         </p>
         {sum != 0 &&
-          (<Button htmlType="button" type="primary" size="large" onClick={onClick}>
-            Оформить заказ
+          (<Button htmlType="button" type="primary" size="large" onClick={onClick} extraClass={style.order__button}>
+            <Link to={`/order`}
+                  className={style.order__link}
+                  state={{ background: location }}>Оформить заказ</Link>
           </Button>)}
 
       </div>
@@ -142,7 +151,6 @@ function BurgerConstructor({ setIsClickOrderList }) {
 }
 
 BurgerConstructor.propTypes = {
-  setIsClickOrderList: func.isRequired
 }
 
 export default BurgerConstructor

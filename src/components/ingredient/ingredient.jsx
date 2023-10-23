@@ -1,5 +1,4 @@
 import { Counter, CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-components'
-import React from 'react'
 import style from './ingredient.module.css'
 import PropTypes, { func, object } from "prop-types";
 import { useDrag } from 'react-dnd'
@@ -7,18 +6,15 @@ import { useDispatch, useSelector } from 'react-redux'
 import { constructorIngredientSelector } from '../../services/selectors/constructorIngredientSelector'
 import { selectIngredient } from '../../services/reducer/selectIngredientSlice'
 import { useModal } from '../../hooks/useModal'
-import { ingredientPropType } from '../../utils/prop-types'
 
 
-function Ingredient({ ingredient, setIsClickIngridient}) {
+
+function Ingredient({ ingredient }) {
 
   const dispatch = useDispatch()
 
-  const { openModal } = useModal();
 
   const onClick = () => {
-    openModal()
-    setIsClickIngridient(true)
     dispatch(selectIngredient(ingredient))
   }
 
@@ -51,7 +47,6 @@ function Ingredient({ ingredient, setIsClickIngridient}) {
 
 Ingredient.propTypes = {
   ingredient: object,
-  setIsClickIngridient: func
 
 }
 
