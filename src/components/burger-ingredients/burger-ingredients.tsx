@@ -8,26 +8,11 @@ import { useSelector } from 'react-redux';
 import { ingredientDataSelector } from '../../services/selectors/ingredientDataSelector';
 import { Link, useLocation } from "react-router-dom";
 
-export type TConstruktorIngredients = [{
-  calories: number,
-  carbohydrates: number,
-  fat: number,
-  image: string,
-  image_large: string,
-  image_mobile: string,
-  name: string,
-  price: number,
-  proteins: number,
-  type: string,
-  __v: number,
-  _id: string,
-  unicId: string,
-}] 
 
 
 function BurgerIngredients() {
 
-  const ingredients = useSelector(ingredientDataSelector) as TConstruktorIngredients
+  const ingredients = useSelector(ingredientDataSelector)
 
   const [current, setCurrent] = React.useState('one')
 

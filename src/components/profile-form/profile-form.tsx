@@ -4,18 +4,16 @@ import styles from './profile-form.module.css'
 import { useDispatch, useSelector } from 'react-redux';
 import { changeUserInfo } from '../../services/reducer/changeUserInfo';
 import { userSelector } from '../../services/selectors/userSelector';
+import { TUser } from '../../services/types';
 
-type U = {
-        name: string
-        email: string  
-}
+
 
 
 function ProfileForm() {
 
     const dispatch = useDispatch();
 
-    const user = useSelector(userSelector) as U
+    const user = useSelector(userSelector) as TUser
 
     const [valueName, setValueName] = useState(`${user.name}`)
     const [valueEmail, setValueEmail] = useState(`${user.email}`)

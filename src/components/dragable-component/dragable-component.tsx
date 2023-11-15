@@ -1,11 +1,10 @@
-import { any, func, number, string } from "prop-types";
 import React, { useRef } from "react";
 import { useDrag, useDrop } from "react-dnd";
-import { TConstruktorIngredients } from "../burger-ingredients/burger-ingredients";
 import type { XYCoord } from 'dnd-core'
+import { TIngredient } from "../../services/types";
 
 type TDragItem = {
-    item: TConstruktorIngredients
+    item: TIngredient
     index: number
 }
 
@@ -77,8 +76,3 @@ export function DragableComponent({ children, moveIngredients, index }: TDragCom
     )
 }
 
-DragableComponent.propTypes = {
-    children: any.isRequired,
-    index: number.isRequired,
-    moveIngredients: func.isRequired
-}

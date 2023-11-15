@@ -1,8 +1,17 @@
 import { createSlice, isAction } from "@reduxjs/toolkit"
 import { postOrderQuery } from "./orderQuery";
+import { TIngredient } from "../types";
+
+type SliseState = {
+    order: Array<TIngredient>,
+    orderNumber: string,
+    isLoading: boolean,
+    error: string | unknown
+    
+}
 
 
-const initialState = {
+const initialState: SliseState = {
     order: [],
     orderNumber: '',
     isLoading: false,

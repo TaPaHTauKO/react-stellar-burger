@@ -6,7 +6,7 @@ import { useSelector } from 'react-redux'
 
 function OrderDetails() {
 
-  const orderNumber = useSelector(orderSelectorNumber) as number
+  const orderNumber = useSelector(orderSelectorNumber)
 
   return (
     <div className={style.order_container}>

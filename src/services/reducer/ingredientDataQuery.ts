@@ -14,7 +14,7 @@ export const fetchIngredientData = createAsyncThunk(
             return thunkApi.fulfillWithValue(responseData.data)
         }
         catch (err) {
-            return thunkApi.rejectWithValue('Ошибка')
+             return thunkApi.rejectWithValue('Ошибка')
         }
     }
 

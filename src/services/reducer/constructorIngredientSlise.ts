@@ -1,7 +1,12 @@
-import { createSlice } from "@reduxjs/toolkit"
+import { PayloadAction, createSlice } from "@reduxjs/toolkit"
 import uuid from "react-uuid"
+import { TIngredient } from "../types"
 
-const initialState = {
+type SliceState = {
+    ingredientInBurger: Array<TIngredient>
+}
+
+const initialState: SliceState = {
     ingredientInBurger: []
 }
 
@@ -10,7 +15,7 @@ const constructorIngredientSlise = createSlice({
     initialState,
     reducers: {
         addIngredient:{
-            reducer: (state,action) => {
+            reducer: (state,action: PayloadAction<TIngredient>) => {
                 const foundBun = state.ingredientInBurger.findIndex(item => (item.type === 'bun') && (item.type === action.payload.type))
             if (foundBun >= 0) {
                 state.ingredientInBurger.splice(foundBun, 1, action.payload)
@@ -33,10 +38,14 @@ const constructorIngredientSlise = createSlice({
 
         sortIngredients: (state, action) => {
             state.ingredientInBurger = action.payload;
+        },
+
+        clearIngredient: (state) => {
+            state.ingredientInBurger = []
         }
 
     }
 })
 
-export const { addIngredient, deleteIngredient, sortIngredients } = constructorIngredientSlise.actions;
+export const { addIngredient, deleteIngredient, sortIngredients, clearIngredient } = constructorIngredientSlise.actions;
 export default constructorIngredientSlise.reducer;

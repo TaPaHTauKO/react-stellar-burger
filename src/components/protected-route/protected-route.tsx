@@ -2,7 +2,7 @@ import { Navigate, useLocation } from "react-router-dom";
 import { useSelector } from "react-redux";
 import React from "react";
 import { userSelector } from "../../services/selectors/userSelector";
-import { TUser } from "../../types/types";
+import { TUser } from "../../services/types";
 
 type TProtected = {
   onlyUnAuth: boolean

@@ -20,6 +20,7 @@ import Modal from "../modal/modal";
 import IngredientDetails from "../ingredient-details/ingredient-details";
 import OrderDetails from "../order-details/order-details";
 import { getAccesToken } from "../../services/reducer/getAccessToken";
+import { OrderFeedSingle } from "../../pages/order-feed-single/orderFeedSingle";
 
 export type TDataIngredient = [{
   calories: number
@@ -79,10 +80,12 @@ function App() {
         <Route path="/ingredients/:id" element={<IngredientDetails />} />
         <Route path="/login" element={<OnlyUnAuth component={<Login />} />} />
         <Route path="/order-feed" element={<OrderFeed />} />
+        <Route path="/order-feed/:id" element={<OrderFeedSingle />} />
         <Route path="/profile" element={<OnlyAuth component={<Profile />} />}>
           <Route path="/profile" element={<ProfileForm />} />
           <Route path="/profile/orders" element={<OrderHistory />} />
         </Route>
+        <Route path="/profile/orders/:id" element={<OrderFeedSingle />} />
         <Route path="/register" element={<OnlyUnAuth component={<Register />} />} />
         <Route path="/reset-password" element={<ResetPassword />} />
       </Routes>
