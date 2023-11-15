@@ -5,10 +5,19 @@ import { getAccesToken } from "./getAccessToken";
 import { logIn } from "./logIn";
 import { logOut } from "./logOut";
 import { changeUserInfo } from "./changeUserInfo";
+import { TUser } from "../types";
 
-const initialState = {
+type SliceState = {
+    user: null | TUser,
+    error: string | unknown,
+    isLoading: boolean,
+    isAuth: boolean,
+    isForgot: boolean,
+}
+
+const initialState: SliceState = {
     user: null,
-    error: '',
+    error: '' ,
     isLoading: false,
     isAuth: false,
     isForgot: false,

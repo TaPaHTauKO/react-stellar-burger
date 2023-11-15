@@ -2,13 +2,14 @@ import { Button, ConstructorElement, CurrencyIcon, DragIcon } from '@ya.praktiku
 import style from './burger-constructor.module.css'
 import { useDrop } from 'react-dnd'
 import { useDispatch, useSelector } from 'react-redux';
-import { addIngredient, deleteIngredient, sortIngredients } from '../../services/reducer/constructorIngredientSlise';
+import { addIngredient, clearIngredient, deleteIngredient, sortIngredients } from '../../services/reducer/constructorIngredientSlise';
 import { constructorIngredientSelector } from '../../services/selectors/constructorIngredientSelector';
 import { DragableComponent } from '../dragable-component/dragable-component';
 import { postOrderQuery } from '../../services/reducer/orderQuery';
 import { useModal } from '../../hooks/useModal';
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { userSelector } from '../../services/selectors/userSelector';
+import { useAppSelector } from '../../services/types';
 
 
 export type TConstruktorIngredients = [{
@@ -45,7 +46,7 @@ function BurgerConstructor() {
     }
   })
 
-  const ingredients = useSelector(constructorIngredientSelector) as TConstruktorIngredients;
+  const ingredients = useAppSelector(constructorIngredientSelector);
   const user = useSelector(userSelector)
 
   const moveIngredients = (dragIndex: number, hoverIndex: number) => {
@@ -69,6 +70,7 @@ function BurgerConstructor() {
 
       openModal()
       dispatch(postOrderQuery(ingrId))
+      dispatch(clearIngredient())
     }
     else {
       navigate('/login')
@@ -77,7 +79,7 @@ function BurgerConstructor() {
 
 
 
-  function handleDeleteIngredient(item: string) {
+  function handleDeleteIngredient(item: string | undefined) {
     dispatch(deleteIngredient(item))
   }
 

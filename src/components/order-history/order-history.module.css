@@ -1,0 +1,32 @@
+.orderhistoryLink {
+    width: 856px;
+    border-radius: 40px;
+    border: 2px dashed var(--interface-accent, #4C4CFF);
+    background: var(--interface-modal-bg, #1C1C21);
+    text-decoration: none;
+    color: var(--text-primary-light-standart-text, #F2F2F3);
+    margin-bottom: 16px;
+}
+
+.orderhistory_container {
+    height: calc(100vh - 250px);
+    width: 1350px;
+    display: flex;
+    flex-direction: column;
+    overflow-y: scroll;
+
+}
+
+.orderhistory_container::-webkit-scrollbar {
+    width: 12px;
+}
+
+.orderhistory_container::-webkit-scrollbar-track {
+    background: #2f2f37;
+}
+
+.orderhistory_container::-webkit-scrollbar-thumb {
+    background: #8585ad;
+    border: 3px solid #2f2f37;
+    border-radius: 6px;
+}

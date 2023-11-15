@@ -1,1 +1,0 @@
-export const selectIngredientSelector = (store) => store.selectIngredient.selectIngredient

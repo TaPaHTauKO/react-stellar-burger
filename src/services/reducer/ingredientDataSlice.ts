@@ -1,16 +1,26 @@
-import { createSlice } from "@reduxjs/toolkit"
+import { ActionReducerMapBuilder, Slice, SliceCaseReducers, createSlice } from "@reduxjs/toolkit"
 import { fetchIngredientData } from "./ingredientDataQuery";
-import uuid from "react-uuid";
+import { TIngredient } from "../types";
 
-const initialState = {
+
+type SliceState = {
+    ingredientData: Array<TIngredient>,
+    isLoading: boolean,
+    error: string | unknown,
+    redusers?: any
+}
+
+const initialState: SliceState = {
     ingredientData: [],
     isLoading: false,
-    error: ''
+    error: '',
+   
 }
 
 const ingredientDataSlice = createSlice({
-    name: 'indgredinetData',
+    name: 'indgredientData',
     initialState,
+    reducers: {},
     extraReducers: (builder) => {
         builder
             .addCase(fetchIngredientData.fulfilled, (state, action) => {
@@ -18,7 +28,7 @@ const ingredientDataSlice = createSlice({
                 state.isLoading = false;
                 state.error = '';
             })
-            .addCase(fetchIngredientData.pending, (state, action) => {
+            .addCase(fetchIngredientData.pending, (state) => {
                 state.isLoading = true;
                 state.error = '';
             })
@@ -30,5 +40,5 @@ const ingredientDataSlice = createSlice({
 
 })
 
-export const { ingredientDataUploading, ingredientDataUpload, ingredientDataError } = ingredientDataSlice.actions;
+
 export default ingredientDataSlice.reducer;

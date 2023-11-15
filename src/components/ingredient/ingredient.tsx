@@ -1,36 +1,20 @@
 import { Counter, CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-components'
 import style from './ingredient.module.css'
-import PropTypes, { func, object } from "prop-types";
 import { useDrag } from 'react-dnd'
-import { useDispatch, useSelector } from 'react-redux'
 import { constructorIngredientSelector } from '../../services/selectors/constructorIngredientSelector'
 import { selectIngredient } from '../../services/reducer/selectIngredientSlice'
-import { TConstruktorIngredients } from '../burger-ingredients/burger-ingredients';
+import { useAppDispatch, useAppSelector } from '../../services/types';
+import { TIngredient } from '../../services/types';
 
+type IIngredient = {
+  ingredient: TIngredient
 
-
-type TIngredient = {
-  ingredient: {
-    calories: number,
-    carbohydrates: number,
-    fat: number,
-    image: string,
-    image_large: string,
-    image_mobile: string,
-    name: string,
-    price: number,
-    proteins: number,
-    type: string,
-    __v: number,
-    _id: string,
-    unicId: string,
-  }
 }
 
 
-function Ingredient({ ingredient } : TIngredient ) {
+function Ingredient({ ingredient } : IIngredient ) {
 
-  const dispatch = useDispatch()
+  const dispatch = useAppDispatch()
 
 
   const onClick = () => {
@@ -44,10 +28,10 @@ function Ingredient({ ingredient } : TIngredient ) {
 
 
 
-  const constructorIngredientList = useSelector(constructorIngredientSelector)
+  const constructorIngredientList = useAppSelector(constructorIngredientSelector)
 
   function counteIngredients(id: string) {
-    return (constructorIngredientList.filter((item: TIngredient["ingredient"]) => (item._id == id)).length
+    return (constructorIngredientList.filter((item) => (item._id === id)).length
     )}
     
   const count = counteIngredients(ingredient._id)
