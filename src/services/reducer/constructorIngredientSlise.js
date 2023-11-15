@@ -28,7 +28,7 @@ const constructorIngredientSlise = createSlice({
         deleteIngredient: (state, action) => {
             state.ingredientInBurger =
                 state.ingredientInBurger.filter(
-                    (item) => item.unicId !== action.payload.unicId)
+                    (item) => item.unicId !== action.payload)
         },
 
         sortIngredients: (state, action) => {
