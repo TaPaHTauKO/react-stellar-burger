@@ -36,7 +36,7 @@ describe('Тест приложения', () => {
 })
 
 describe('Тест модального окна ингредиента', ()=> {
-    it('тест', ()=> {
+    it('тест окрытия/закрытия модального окна ингредиента', ()=> {
         cy.visit(testUrl);
         cy.get(ingredient).should("exist");
         cy.get(inrgedientCard).eq(1).should("exist");
