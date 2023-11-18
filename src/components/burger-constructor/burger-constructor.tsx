@@ -71,8 +71,30 @@ function BurgerConstructor() {
     }
     else {
       openModal()
-      dispatch(getAccesToken())
-      dispatch(postOrderQuery(ingrId))
+      // dispatch(getAccesToken()).then(res => {
+      //   if(res.type === 'getAccesToken/post/fulfilled'){ 
+      //     dispatch(postOrderQuery(ingrId)).then(res => {console.log(res);
+      //     })
+      //     console.log(123)
+      //   }
+      //    else{console.log(12333)} 
+          
+      // })
+      dispatch(postOrderQuery({obj:ingrId, token: localStorage.getItem("accessToken") || ''})).then(res => {
+
+        if(res.payload === '403 - error'){
+          
+          dispatch(getAccesToken()).then(res => {
+
+          if(res.type === 'getAccesToken/post/fulfilled'){
+
+            localStorage.setItem("accessToken", res.payload.accessToken);
+
+            dispatch(postOrderQuery({obj:ingrId, token: res.payload.accessToken}))
+
+          }
+        })}
+      })
     }
   };
 
