@@ -44,7 +44,7 @@ function OrderFeed() {
 
           {orderFeed?.orders.map((order: IOrders) => (
 
-            <Link to={`/order-feed/${order._id}`} key={order._id} className={styles.ordeFeedLink} state={{data:order, background: location}}>
+            <Link to={`/order-feed/${order.number}`} key={order._id} className={styles.ordeFeedLink} state={{data:order, background: location}}>
 
               <OrderFeedCard order={order} />
 

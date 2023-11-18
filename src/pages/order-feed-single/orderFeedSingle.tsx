@@ -73,7 +73,7 @@ export const OrderFeedSingle: FC = () => {
                     {ingredientsInOrder2[0]?.map((ingr) => (
                         <div key={ingr._id} className={`${styles.orderFeedSolo__ingredient}`}>
                             <img src={ingr?.image} alt={ingr?.name} className={`${styles.orderFeedSolo__img}`} />
-                            <p className={`${styles.orderFeedSolo__name}`}>{ingr?.name}</p>
+                            <p className={`${styles.orderFeedSoloIngredient__name}`}>{ingr?.name}</p>
                             <p className={`${styles.orderFeedSolo__price}`}>{ingr?.type === 'bun' ? `2 x ${ingr?.price}` : `1 x ${ingr?.price}`} <CurrencyIcon type="primary" /></p>
                         </div>
 

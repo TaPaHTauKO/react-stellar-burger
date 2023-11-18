@@ -46,7 +46,7 @@ function App() {
     }, []
   )
 
-  useEffect(() => dispatch(fetchIngredientData()) as any, [])
+  useEffect(() => {dispatch(fetchIngredientData())}, [])
   const isDataIngredients = useAppSelector(ingredientDataSelector);
 
   if (isDataIngredients == null) return null

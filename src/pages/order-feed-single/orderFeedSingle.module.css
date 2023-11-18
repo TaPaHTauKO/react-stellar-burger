@@ -27,6 +27,17 @@
     line-height: 30px; /* 125% */
 }
 
+.orderFeedSoloIngredient__name {
+    max-width: 320px;
+    color: var(--text-primary-light-standart-text, #F2F2F3);
+    /* desktop/display small */
+    font-family: JetBrains Mono;
+    font-size: 24px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 30px; /* 125% */
+}
+
 .orderFeedSolo__ingredients {
     display: flex;
     flex-direction: column;
@@ -59,6 +70,7 @@
 .orderFeedSolo__ingredient {
     display: flex;
     justify-content: space-between;
+    align-items: center;
 }
 
 
