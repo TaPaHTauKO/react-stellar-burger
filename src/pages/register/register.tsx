@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { Button, EmailInput, Input, PasswordInput } from "@ya.praktikum/react-developer-burger-ui-components";
 import styles from './register.module.css'
 import { userRegistration } from '../../services/reducer/userRegistration';
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useAppDispatch } from '../../services/types';
 
 

@@ -4,7 +4,7 @@ const initState = {
     selectIngredient: []
 }
 
-const ingredientWithUuid = {
+export const ingredientWithUuid = {
     "__v": 0,
     "_id": "643d69a5c3f7b9001cfa093f",
     "calories": 420,

@@ -9,6 +9,7 @@ import { useModal } from '../../hooks/useModal';
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { userSelector } from '../../services/selectors/userSelector';
 import { useAppDispatch, useAppSelector } from '../../services/types';
+import { getAccesToken } from '../../services/reducer/getAccessToken';
 
 
 export type TConstruktorIngredients = [{
@@ -58,10 +59,9 @@ function BurgerConstructor() {
     dispatch(sortIngredients(updateIngredientList))
   }
 
+  const token = localStorage.getItem('accessToken')
 
   const ingredientBun = ingredients?.find(item => item.type === "bun")
-
-
 
   const ingrId = ingredients?.map((e) => e._id)
 
@@ -71,6 +71,7 @@ function BurgerConstructor() {
     }
     else {
       openModal()
+      dispatch(getAccesToken())
       dispatch(postOrderQuery(ingrId))
     }
   };

@@ -1,10 +1,4 @@
 import { configureStore, getDefaultMiddleware } from "@reduxjs/toolkit";
-import constructorIngredientReduser from "./reducer/constructorIngredientSlise";
-import ingredientDataReduser from './reducer/ingredientDataSlice'
-import  selectIngredientReduser  from "./reducer/selectIngredientSlice";
-import  OrderReduser  from "./reducer/orderSlise";
-import UserReduser from "./reducer/userSlise"
-import { liveOrderReducer } from "./reducer/orderFeedReduser";
 import { socketMiddleware } from "./middleware/soket-middleware";
 import rootReducer from './reducer/rootReduser';
 
@@ -38,14 +32,7 @@ const wsActions = {
 const liveOrderMiddleware = socketMiddleware(wsActions)
 
 const store = configureStore({
-    reducer: rootReducer
-        // ingredientData: ingredientDataReduser,
-        // constructorIngredient: constructorIngredientReduser,
-        // selectIngredient: selectIngredientReduser,
-        // order: OrderReduser,
-        // user: UserReduser,
-        // liveOrderFeed: liveOrderReducer,
-    ,
+    reducer: rootReducer,
     middleware: (getDefaultMiddleware) => {
         return getDefaultMiddleware().concat(liveOrderMiddleware)
     }

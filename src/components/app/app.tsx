@@ -20,7 +20,7 @@ import IngredientDetails from "../ingredient-details/ingredient-details";
 import OrderDetails from "../order-details/order-details";
 import { getAccesToken } from "../../services/reducer/getAccessToken";
 import { OrderFeedSingle } from "../../pages/order-feed-single/orderFeedSingle";
-import {useAppDispatch, useAppSelector} from "../../services/types";
+import { useAppDispatch, useAppSelector } from "../../services/types";
 
 
 function App() {
@@ -46,7 +46,7 @@ function App() {
     }, []
   )
 
-  useEffect(() => {dispatch(fetchIngredientData())}, [])
+  useEffect(() => { dispatch(fetchIngredientData()) }, [])
   const isDataIngredients = useAppSelector(ingredientDataSelector);
 
   if (isDataIngredients == null) return null
@@ -82,6 +82,15 @@ function App() {
               <Modal
                 closeModalCb={handleCloseModal}
                 children={<IngredientDetails />}
+              ></Modal>
+            }
+          />
+          <Route
+            path="/profile/orders/:id"
+            element={
+              <Modal
+                closeModalCb={handleCloseModal}
+                children={<OrderFeedSingle />}
               ></Modal>
             }
           />

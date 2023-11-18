@@ -1,38 +1,48 @@
+const ingredient = "[class^=burger-ingredients_ingredient]";
+const inrgedientCard = "[class^=burger-ingredients_ingredient]  > [class^=ingredient_ingredient_card]";
+const constructorSection = "[class^=burger-constructor_burger_constructor_section]";
+const inputEmail = ".mt-6 > .input";
+const inputPassword = ":nth-child(3) > .input";
+const orderLink = "[class^=burger-constructor_order__link]";
+const closeIcon = "[class^=modal_modal_close_icon]";
+const testUrl = 'http://localhost:3000/'
+
+
 describe('Тест приложения', () => {
-    it('тест', ()=> {
-        cy.visit('http://localhost:3000/');
-        cy.get("[class^=burger-ingredients_ingredient]").should("exist");
-        cy.get("[class^=burger-constructor_constructor]").should("exist");
-        cy.get("[class^=burger-ingredients_ingredient]  > [class^=ingredient_ingredient_card]").eq(1).should("exist");
-        cy.get("[class^=burger-ingredients_ingredient]  > [class^=ingredient_ingredient_card]").eq(1).trigger("dragstart");
-        cy.get("[class^=burger-constructor_burger_constructor_section]").trigger("drop");
-        cy.get("[class^=burger-ingredients_ingredient]  > [class^=ingredient_ingredient_card]").eq(3).trigger("dragstart");
-        cy.get("[class^=burger-constructor_burger_constructor_section]").trigger("drop");
+    it('тест функциональности конструктора бургерной', ()=> {
+        cy.visit(testUrl);
+        cy.get(ingredient).should("exist");
+        cy.get(constructorSection).should("exist");
+        cy.get(inrgedientCard).eq(1).should("exist");
+        cy.get(inrgedientCard).eq(1).trigger("dragstart");
+        cy.get(constructorSection).trigger("drop");
+        cy.get(inrgedientCard).eq(3).trigger("dragstart");
+        cy.get(constructorSection).trigger("drop");
         cy.get("button").contains("Оформить заказ").should("exist");
         cy.get("button").contains("Оформить заказ").click();
-        cy.get(".mt-6 > .input").should("exist");
-        cy.get(".mt-6 > .input").type("zx27111@mail.ru");
-        cy.get(":nth-child(3) > .input").should("exist");
-        cy.get(":nth-child(3) > .input").type("11223344");
+        cy.get(inputEmail).should("exist");
+        cy.get(inputEmail).type("zx27111@mail.ru");
+        cy.get(inputPassword).should("exist");
+        cy.get(inputPassword).type("11223344");
         cy.get("button").contains("Войти").should("exist");
         cy.get("button").contains("Войти").click();
 
-        cy.get("[class^=burger-constructor_order__link]").should("exist");
-        cy.get("[class^=burger-constructor_order__link]").click();
+        cy.get(orderLink).should("exist");
+        cy.get(orderLink).click();
 
-        cy.get("[class^=modal_modal_close_icon]").should("exist");
-        cy.get("[class^=modal_modal_close_icon]").click();
+        cy.get(closeIcon).should("exist");
+        cy.get(closeIcon).click();
     })
 })
 
 describe('Тест модального окна ингредиента', ()=> {
     it('тест', ()=> {
-        cy.visit('http://localhost:3000/');
-        cy.get("[class^=burger-ingredients_ingredient]").should("exist");
-        cy.get("[class^=burger-ingredients_ingredient]  > [class^=ingredient_ingredient_card]").eq(1).should("exist");
-        cy.get("[class^=burger-ingredients_ingredient]  > [class^=ingredient_ingredient_card]").eq(1).click();
+        cy.visit(testUrl);
+        cy.get(ingredient).should("exist");
+        cy.get(inrgedientCard).eq(1).should("exist");
+        cy.get(inrgedientCard).eq(1).click();
         cy.get("h2").contains("Детали ингредиента").should("exist");
-        cy.get("[class^=modal_modal_close_icon]").should("exist");
-        cy.get("[class^=modal_modal_close_icon]").click();
+        cy.get(closeIcon).should("exist");
+        cy.get(closeIcon).click();
     })
 })

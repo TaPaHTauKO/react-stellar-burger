@@ -1,14 +1,9 @@
-import React, { useEffect } from 'react'
+import { useEffect } from 'react'
 import styles from './order-feed.module.css'
 import { IOrders, useAppDispatch, useAppSelector } from '../../services/types'
-
 import { connect as connectLiveOrder, disconnect as disconnectLiveOrder } from '../../services/reducer/orderFeedActions';
-
-import { WebsocketStatus } from '../../services/types';
-import { orderFeedSelector } from '../../services/selectors/orderFeedSelector';
 import { Link, useLocation } from 'react-router-dom';
 import OrderFeedCard from '../../components/order-feed-card/orderFeedCard';
-import uuid from 'react-uuid';
 
 export const LIVE_TABLE_SERVER_URL = 'wss://norma.nomoreparties.space/orders/all';
 
@@ -18,7 +13,6 @@ function OrderFeed() {
   const dispatch = useAppDispatch()
 
   const { orderFeed, status } = useAppSelector(state => state.liveOrderFeed);
-  const isDisconnected = status !== WebsocketStatus.OFFLINE;
 
   const numbersRedyOrder = orderFeed?.orders.filter((el) => el.status === "done")
 

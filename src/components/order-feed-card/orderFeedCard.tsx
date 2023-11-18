@@ -11,12 +11,6 @@ interface IOrderCard {
 function OrderFeedCard(order: IOrderCard) {
     const isDataIngredients = useAppSelector(ingredientDataSelector);
 
-    function ignoreUndefined(element: any) {
-        if (typeof element != "undefined") {
-            return element;
-        }
-    }
-
     let ingredientsInOrder = order.order.ingredients.map((i) =>
         isDataIngredients?.find((item) => item._id === i) as TIngredient
     )

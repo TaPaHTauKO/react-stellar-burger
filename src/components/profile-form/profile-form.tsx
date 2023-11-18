@@ -4,7 +4,7 @@ import styles from './profile-form.module.css'
 
 import { changeUserInfo } from '../../services/reducer/changeUserInfo';
 import { userSelector } from '../../services/selectors/userSelector';
-import { TUser, useAppDispatch, useAppSelector } from '../../services/types';
+import { useAppDispatch, useAppSelector } from '../../services/types';
 
 
 

@@ -1,4 +1,4 @@
-import { ActionReducerMapBuilder, Slice, SliceCaseReducers, createSlice } from "@reduxjs/toolkit"
+import { createSlice } from "@reduxjs/toolkit"
 import { fetchIngredientData } from "./ingredientDataQuery";
 import { TIngredient } from "../types";
 

@@ -1,4 +1,4 @@
-import { createSlice, isAction } from "@reduxjs/toolkit"
+import { createSlice } from "@reduxjs/toolkit"
 import { postOrderQuery } from "./orderQuery";
 import { IOrders, TIngredient } from "../types";
 import { selectOrderQuery } from "./selectOrderQuery";
@@ -23,10 +23,16 @@ const initialState: SliseState = {
 const orderSlise = createSlice({
     name: 'order',
     initialState,
-    reducers: {},
+    reducers: {
+        setOrder(state,action) {
+            state.orderNumber = action.payload;
+        }
+
+    },
     extraReducers: (builder) => {
         builder
         .addCase(postOrderQuery.pending, (state) => {
+            state.orderNumber = ''
             state.isLoading = true;
             state.error = ''; 
         })
@@ -55,5 +61,5 @@ const orderSlise = createSlice({
     }    
 })
 
-
+export const { setOrder } = orderSlise.actions;
 export default orderSlise.reducer;

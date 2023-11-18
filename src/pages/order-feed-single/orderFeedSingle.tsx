@@ -1,7 +1,7 @@
-import React, { FC, useEffect, useState } from 'react'
+import { FC, useEffect } from 'react'
 import styles from './orderFeedSingle.module.css'
 import { useLocation, useParams } from 'react-router-dom'
-import { TIngredient, useAppDispatch, useAppSelector } from '../../services/types'
+import { useAppDispatch, useAppSelector } from '../../services/types'
 import { ingredientDataSelector } from '../../services/selectors/ingredientDataSelector'
 import { CurrencyIcon, FormattedDate } from '@ya.praktikum/react-developer-burger-ui-components'
 import { selectOrderQuery } from '../../services/reducer/selectOrderQuery'
@@ -20,7 +20,6 @@ export type TSoloOrder = {
 
 export const OrderFeedSingle: FC = () => {
 
-    const location = useLocation()
     const dispatch = useAppDispatch()
 
     const { id } = useParams()
@@ -32,11 +31,6 @@ export const OrderFeedSingle: FC = () => {
     }, [])
 
 
-    function ignoreUndefined(element: any) {
-        if (typeof element != "undefined") {
-            return element;
-        }
-    }
     const isDataIngredients = useAppSelector(ingredientDataSelector);
     
     const orderIngredients = useAppSelector(orderIngredientsOrders)
