@@ -10,7 +10,6 @@ import Register from "../../pages/register/register";
 import ResetPassword from "../../pages/reset-password/reset-password";
 import ProfileForm from "../profile-form/profile-form";
 import OrderHistory from "../order-history/order-history";
-import { useDispatch, useSelector } from "react-redux";
 import { OnlyAuth, OnlyUnAuth } from "../protected-route/protected-route"
 import { useEffect } from "react";
 import { fetchIngredientData } from "../../services/reducer/ingredientDataQuery";
@@ -21,26 +20,11 @@ import IngredientDetails from "../ingredient-details/ingredient-details";
 import OrderDetails from "../order-details/order-details";
 import { getAccesToken } from "../../services/reducer/getAccessToken";
 import { OrderFeedSingle } from "../../pages/order-feed-single/orderFeedSingle";
-
-export type TDataIngredient = [{
-  calories: number
-  carbohydrates: number
-  fat: number
-  image: string
-  image_large: string
-  image_mobile: string
-  name: string
-  price: number
-  proteins: number
-  type: string
-  __v: number
-  _id: string
-}]
+import {useAppDispatch, useAppSelector} from "../../services/types";
 
 
 function App() {
-
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
   const refreshToken: string | null = localStorage.getItem("refreshToken");
   const location = useLocation()
   const background = location.state && location.state.background
@@ -63,9 +47,9 @@ function App() {
   )
 
   useEffect(() => dispatch(fetchIngredientData()) as any, [])
-  const isDataIngredients = useSelector(ingredientDataSelector);
+  const isDataIngredients = useAppSelector(ingredientDataSelector);
 
-  if (isDataIngredients?.length < 1) return null
+  if (isDataIngredients == null) return null
 
 
 
@@ -108,6 +92,15 @@ function App() {
               <Modal
                 closeModalCb={handleCloseModal}
                 children={<OrderDetails />}
+              ></Modal>
+            }
+          />
+          <Route
+            path="/order-feed/:id"
+            element={
+              <Modal
+                closeModalCb={handleCloseModal}
+                children={<OrderFeedSingle />}
               ></Modal>
             }
           />

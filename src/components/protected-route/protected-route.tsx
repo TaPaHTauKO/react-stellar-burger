@@ -1,8 +1,6 @@
 import { Navigate, useLocation } from "react-router-dom";
-import { useSelector } from "react-redux";
-import React from "react";
 import { userSelector } from "../../services/selectors/userSelector";
-import { TUser } from "../../services/types";
+import { TUser, useAppSelector } from "../../services/types";
 
 type TProtected = {
   onlyUnAuth: boolean
@@ -13,7 +11,7 @@ type TComponent = {
 }
 
 const Protected = ({ onlyUnAuth = false, component }: TProtected) => {
-  const user = useSelector(userSelector) as TUser;
+  const user = useAppSelector(userSelector) as TUser;
   const location = useLocation();
 
   if (onlyUnAuth && user) {

@@ -6,8 +6,6 @@
 
 .orderFeedSolo__container {
     width: 640px;
-
-    background: var(--interface-bg, #131316);
 }
 
 .orderFeedSolo__done {

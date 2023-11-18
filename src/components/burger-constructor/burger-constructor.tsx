@@ -1,15 +1,14 @@
 import { Button, ConstructorElement, CurrencyIcon, DragIcon } from '@ya.praktikum/react-developer-burger-ui-components';
 import style from './burger-constructor.module.css'
 import { useDrop } from 'react-dnd'
-import { useDispatch, useSelector } from 'react-redux';
-import { addIngredient, clearIngredient, deleteIngredient, sortIngredients } from '../../services/reducer/constructorIngredientSlise';
+import { addIngredient, deleteIngredient, sortIngredients } from '../../services/reducer/constructorIngredientSlise';
 import { constructorIngredientSelector } from '../../services/selectors/constructorIngredientSelector';
 import { DragableComponent } from '../dragable-component/dragable-component';
 import { postOrderQuery } from '../../services/reducer/orderQuery';
 import { useModal } from '../../hooks/useModal';
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { userSelector } from '../../services/selectors/userSelector';
-import { useAppSelector } from '../../services/types';
+import { useAppDispatch, useAppSelector } from '../../services/types';
 
 
 export type TConstruktorIngredients = [{
@@ -26,7 +25,7 @@ export type TConstruktorIngredients = [{
   __v: number,
   _id: string,
   unicId: string,
-}] 
+}]
 
 
 
@@ -35,7 +34,7 @@ function BurgerConstructor() {
 
   const { openModal } = useModal();
 
-  const dispatch = useDispatch()
+  const dispatch = useAppDispatch()
   const location = useLocation()
   const navigate = useNavigate();
 
@@ -47,7 +46,8 @@ function BurgerConstructor() {
   })
 
   const ingredients = useAppSelector(constructorIngredientSelector);
-  const user = useSelector(userSelector)
+  const user = useAppSelector(userSelector)
+
 
   const moveIngredients = (dragIndex: number, hoverIndex: number) => {
 
@@ -66,14 +66,12 @@ function BurgerConstructor() {
   const ingrId = ingredients?.map((e) => e._id)
 
   const onClick = () => {
-    if (user !== null) {
-
-      openModal()
-      dispatch(postOrderQuery(ingrId))
-      dispatch(clearIngredient())
+    if (user == null) {
+      navigate('/login')
     }
     else {
-      navigate('/login')
+      openModal()
+      dispatch(postOrderQuery(ingrId))
     }
   };
 
@@ -85,11 +83,10 @@ function BurgerConstructor() {
 
 
   const initValue = 0;
-  const sum = ingredients.reduce(
+  const sum = ingredients?.reduce(
     (accumulator, currentValue) => accumulator + currentValue.price,
     initValue
   );
-
 
 
   return (
@@ -123,7 +120,7 @@ function BurgerConstructor() {
               <DragableComponent
                 moveIngredients={moveIngredients}
                 index={index}
-                
+
                 key={el.unicId}>
                 <li className={style.constructor_li + ' mb-4'}>
                   <DragIcon type={'primary'} />
@@ -161,12 +158,19 @@ function BurgerConstructor() {
           {sum}
           <CurrencyIcon type="primary" />
         </p>
-        {sum != 0 &&
-          (<Button htmlType="button" type="primary" size="large" onClick={onClick} extraClass={style.order__button}>
-            <Link to={`/order`}
+        {sum != 0 && user !== null &&
+          (
+            <Link to={`/order`} onClick={onClick}
               className={style.order__link}
               state={{ background: location }}>Оформить заказ</Link>
-          </Button>)}
+          )}
+
+        {sum != 0 && user == null &&
+          (
+            <Button htmlType='button' onClick={()=>onClick()}
+               extraClass={style.order__link}
+              >Оформить заказ</Button>
+          )}
 
       </div>
 
@@ -174,7 +178,5 @@ function BurgerConstructor() {
   )
 }
 
-BurgerConstructor.propTypes = {
-}
 
 export default BurgerConstructor

@@ -1,31 +1,29 @@
 import { createSlice, isAction } from "@reduxjs/toolkit"
 import { postOrderQuery } from "./orderQuery";
-import { TIngredient } from "../types";
+import { IOrders, TIngredient } from "../types";
+import { selectOrderQuery } from "./selectOrderQuery";
 
 type SliseState = {
-    order: Array<TIngredient>,
+    order: Array<TIngredient> | null,
     orderNumber: string,
     isLoading: boolean,
-    error: string | unknown
-    
+    error: string | unknown,
+    ingredientsNumbers: IOrders[]  | null 
 }
 
 
 const initialState: SliseState = {
-    order: [],
+    order: null,
     orderNumber: '',
     isLoading: false,
-    error: ''
+    error: '',
+    ingredientsNumbers: null
 }
 
 const orderSlise = createSlice({
     name: 'order',
     initialState,
-    reducers: {
-        saveOrder: (state, action) => {
-            state.orderNumber = action.payload
-        }
-    },
+    reducers: {},
     extraReducers: (builder) => {
         builder
         .addCase(postOrderQuery.pending, (state) => {
@@ -38,12 +36,24 @@ const orderSlise = createSlice({
             state.error = '';  
         })
         .addCase(postOrderQuery.rejected,(state, action) => {
-            debugger
+            state.isLoading = false;
+            state.error = action.payload;
+        })
+        .addCase(selectOrderQuery.pending, (state) => {
+            state.isLoading = true;
+            state.error = ''; 
+        })
+        .addCase(selectOrderQuery.fulfilled, (state, action) => {                               
+            state.ingredientsNumbers = action.payload.orders
+            state.isLoading = false;
+            state.error = '';  
+        })
+        .addCase(selectOrderQuery.rejected,(state, action) => {
             state.isLoading = false;
             state.error = action.payload;
         })
     }    
 })
 
-export const {saveOrder} = orderSlise.actions;
+
 export default orderSlise.reducer;

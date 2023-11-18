@@ -1,14 +1,14 @@
 import React from 'react'
 import styles from "./profile.module.css";
 import { NavLink, Outlet, useNavigate } from "react-router-dom";
-import { useDispatch } from 'react-redux';
 import { logOut } from '../../services/reducer/logOut';
+import { useAppDispatch } from '../../services/types';
 
 
 function Profile() {
 
   const navigate = useNavigate();
-  const dispatch = useDispatch()
+  const dispatch = useAppDispatch()
 
   const handleExit = () => {
     dispatch(logOut());

@@ -4,14 +4,13 @@ import { TIngredient } from "../types";
 
 
 type SliceState = {
-    ingredientData: Array<TIngredient>,
+    ingredientData: Array<TIngredient> | null,
     isLoading: boolean,
-    error: string | unknown,
-    redusers?: any
+    error: string | unknown
 }
 
 const initialState: SliceState = {
-    ingredientData: [],
+    ingredientData: null,
     isLoading: false,
     error: '',
    

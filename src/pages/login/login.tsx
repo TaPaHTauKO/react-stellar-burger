@@ -1,14 +1,14 @@
 import React, { useState } from 'react'
 import { EmailInput, PasswordInput, Button } from "@ya.praktikum/react-developer-burger-ui-components";
-import styles from './login.module.css'
-import { useDispatch } from 'react-redux';
+import styles from './login.module.css';
 import { Link } from "react-router-dom";
 import { logIn } from '../../services/reducer/logIn';
+import { useAppDispatch } from '../../services/types';
 
 
 function Login() {
 
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
  
 
   const [valueEmail, setValueEmail] = useState('')
@@ -30,6 +30,7 @@ function Login() {
           placeholder="Логин"
           isIcon={true}
           extraClass="mb-6 mt-6"
+          disabled={false}
         />
         <PasswordInput
           onChange={e => setValuePassword(e.target.value)}

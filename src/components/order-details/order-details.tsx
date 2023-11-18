@@ -2,11 +2,11 @@ import React from 'react'
 import style from './order-details.module.css'
 import image from '../../images/graphics.svg'
 import { orderSelectorNumber } from '../../services/selectors/orderSelector'
-import { useSelector } from 'react-redux'
+import { useAppSelector } from '../../services/types'
 
 function OrderDetails() {
 
-  const orderNumber = useSelector(orderSelectorNumber)
+  const orderNumber = useAppSelector(orderSelectorNumber)
 
   return (
     <div className={style.order_container}>
