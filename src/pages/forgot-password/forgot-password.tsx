@@ -2,14 +2,14 @@ import { EmailInput, Button } from '@ya.praktikum/react-developer-burger-ui-comp
 import React, { useState } from 'react'
 import styles from './forgot-password.module.css'
 import { sendEmail } from '../../services/reducer/sendEmailForReset'
-import { useDispatch } from 'react-redux';
 import { setForgotPass } from '../../services/reducer/userSlise';
 import { useNavigate } from 'react-router-dom';
+import { useAppDispatch } from '../../services/types';
 
 function ForgotPassword() {
 
   const [email, setEmail] = useState('')
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
   const navigate = useNavigate();
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>, email: string) => {

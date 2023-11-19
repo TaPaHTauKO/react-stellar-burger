@@ -70,7 +70,6 @@ export function DragableComponent({ children, moveIngredients, index }: TDragCom
     })
     drag(drop(ref))
 
-    const opacity = isDragging ? 0 : 1
     return (
         <div ref={ref}>{children}</div>
     )

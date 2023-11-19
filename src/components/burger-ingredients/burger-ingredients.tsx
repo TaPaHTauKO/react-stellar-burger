@@ -2,17 +2,16 @@ import { Tab } from '@ya.praktikum/react-developer-burger-ui-components'
 import React, { useEffect, useRef } from 'react'
 import Ingredient from '../ingredient/ingredient'
 import style from './burger-ingredients.module.css'
-import PropTypes, { func } from "prop-types";
 import { useInView } from 'react-intersection-observer';
-import { useSelector } from 'react-redux';
 import { ingredientDataSelector } from '../../services/selectors/ingredientDataSelector';
 import { Link, useLocation } from "react-router-dom";
+import { useAppSelector } from '../../services/types';
 
 
 
 function BurgerIngredients() {
 
-  const ingredients = useSelector(ingredientDataSelector)
+  const ingredients = useAppSelector(ingredientDataSelector)
 
   const [current, setCurrent] = React.useState('one')
 
@@ -54,7 +53,7 @@ function BurgerIngredients() {
       <ul className={style.ingredient_ul}>
         <h2 className="text text_type_main-medium mb-6 mt-10" ref={bunTabRef}>Булки</h2>
         <li className={style.ingredient_li} ref={bunRef}>
-          {ingredients.map(item => {
+          {ingredients?.map(item => {
             if (item.type === "bun") {
 
               return (
@@ -71,7 +70,7 @@ function BurgerIngredients() {
         </li>
         <h2 className="text text_type_main-medium mb-6 mt-10" ref={sauseTabRef}>Соусы</h2>
         <li className={style.ingredient_li} ref={sauseRef}>
-          {ingredients.map(item => {
+          {ingredients?.map(item => {
             if (item.type === "sauce") {
               return (
                 <Link to={`/ingredients/${item._id}`}
@@ -87,7 +86,7 @@ function BurgerIngredients() {
         </li>
         <h2 className="text text_type_main-medium mb-6 mt-10" ref={mainTabRef}>Начинки</h2>
         <li className={style.ingredient_li} ref={mainRef}>
-          {ingredients.map(item => {
+          {ingredients?.map(item => {
             if (item.type === "main") {
               return (
                 <Link to={`/ingredients/${item._id}`}
@@ -108,8 +107,5 @@ function BurgerIngredients() {
   )
 }
 
-BurgerIngredients.propTypes = {
-  setIsClickOrderList: func
-}
 
 export default BurgerIngredients

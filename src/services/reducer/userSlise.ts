@@ -15,7 +15,7 @@ type SliceState = {
     isForgot: boolean,
 }
 
-const initialState: SliceState = {
+export const initialState: SliceState = {
     user: null,
     error: '' ,
     isLoading: false,
@@ -28,18 +28,8 @@ const userSlise = createSlice({
     name: 'user',
     initialState,
     reducers: {
-        removeUser(state) {
-            state.user = null;
-            state.isLoading = false;
-            state.error = '';
-            localStorage.removeItem("accessToken");
-            localStorage.removeItem("refreshToken");
-            state.isAuth = false;
-            
-        },
-        setUserAuth(state) {
-            state.isAuth = true;
-        },
+
+
         setForgotPass(state) {
             state.isForgot = true;
         }
@@ -111,7 +101,7 @@ const userSlise = createSlice({
                 state.isLoading = true;
                 state.error = '';
             })
-            .addCase(logOut.fulfilled, (state, action) => {
+            .addCase(logOut.fulfilled, (state) => {
                 state.user = null;
                 state.isLoading = false;
                 state.error = '';
@@ -139,6 +129,6 @@ const userSlise = createSlice({
     }
 })
 
-export const { setUserAuth, removeUser, setForgotPass } = userSlise.actions;
+export const { setForgotPass } = userSlise.actions;
 
 export default userSlise.reducer

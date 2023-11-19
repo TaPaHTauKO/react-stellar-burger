@@ -1,17 +1,16 @@
-import { ActionReducerMapBuilder, Slice, SliceCaseReducers, createSlice } from "@reduxjs/toolkit"
+import { createSlice } from "@reduxjs/toolkit"
 import { fetchIngredientData } from "./ingredientDataQuery";
 import { TIngredient } from "../types";
 
 
 type SliceState = {
-    ingredientData: Array<TIngredient>,
+    ingredientData: Array<TIngredient> | null,
     isLoading: boolean,
-    error: string | unknown,
-    redusers?: any
+    error: string | unknown
 }
 
-const initialState: SliceState = {
-    ingredientData: [],
+ export const initialState: SliceState = {
+    ingredientData: null,
     isLoading: false,
     error: '',
    

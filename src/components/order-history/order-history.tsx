@@ -1,15 +1,15 @@
 import React, { useEffect } from 'react'
 import { IOrders, useAppDispatch, useAppSelector } from '../../services/types'
 import { connect as connectLiveOrder, disconnect as disconnectLiveOrder } from '../../services/reducer/orderFeedActions';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import OrderFeedCard from '../order-feed-card/orderFeedCard';
 import styles from './order-history.module.css'
-import { LIVE_TABLE_SERVER_URL } from '../../pages/order-feed/order-feed';
 
 
 function OrderHistory() {
 
   const dispatch = useAppDispatch()
+  const location = useLocation()
 
   const accessToken = localStorage.getItem('accessToken')
 
@@ -22,10 +22,6 @@ function OrderHistory() {
 
   useEffect(() => {
     dispatch(connectLiveOrder(`${LIVE_TABLE_SERVER_URL}${token}`))
-
-    // для проверки
-    // dispatch(connectLiveOrder(LIVE_TABLE_SERVER_URL))
-    
     return () => { dispatch(disconnectLiveOrder()); }
 
   }, [])
@@ -40,7 +36,7 @@ function OrderHistory() {
 
       {orderFeed?.orders.map((order: IOrders) => (
 
-        <Link to={`/order-feed/${order._id}`} key={order._id} className={styles.orderhistoryLink} state={order}>
+        <Link to={`/profile/orders/${order.number}`} key={order._id} className={styles.orderhistoryLink} state={{data:order, background: location}}>
 
           <OrderFeedCard order={order} />
 

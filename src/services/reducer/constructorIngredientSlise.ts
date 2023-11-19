@@ -1,12 +1,12 @@
 import { PayloadAction, createSlice } from "@reduxjs/toolkit"
-import uuid from "react-uuid"
 import { TIngredient } from "../types"
+import { idGenerator } from "../../utils/utils"
 
 type SliceState = {
     ingredientInBurger: Array<TIngredient>
 }
 
-const initialState: SliceState = {
+export const initialState: SliceState = {
     ingredientInBurger: []
 }
 
@@ -25,7 +25,7 @@ const constructorIngredientSlise = createSlice({
             }
             },
             prepare: (el) => {
-                const unicId = uuid()
+                const unicId = idGenerator()
                 return { payload: {...el, unicId} }
             }
         },

@@ -1,8 +1,5 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import { baseUrl, checkResponse } from "../../utils/api";
-import { getAccesToken } from "./getAccessToken";
-
-
 
 
 export const getUser = createAsyncThunk(

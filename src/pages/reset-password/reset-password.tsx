@@ -1,9 +1,9 @@
 import React, { useState } from 'react'
 import { PasswordInput, Button, Input } from '@ya.praktikum/react-developer-burger-ui-components'
-import {  useSelector } from 'react-redux';
 import { Navigate } from 'react-router-dom';
 import styles from './reset-password.module.css'
 import { userForgotSelector } from '../../services/selectors/userSelector';
+import { useAppSelector } from '../../services/types';
 
 function ResetPassword() {
 
@@ -13,7 +13,7 @@ function ResetPassword() {
   const [password, setPassword] = useState('')
   const [code, setCode] = useState('')
 
-  const check = useSelector(userForgotSelector)
+  const check = useAppSelector(userForgotSelector)
 
 
   return (

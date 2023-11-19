@@ -1,38 +1,21 @@
 import React from 'react'
 import style from './ingredient-details.module.css'
-import { useSelector } from 'react-redux';
-import { selectIngredientSelector } from '../../services/selectors/selectIngredientSelector';
 import { useParams } from 'react-router-dom'
 import { ingredientDataSelector } from '../../services/selectors/ingredientDataSelector';
+import { useAppSelector } from '../../services/types';
 
-type TIngredients = [{
-    calories: number,
-    carbohydrates: number,
-    fat: number,
-    image: string,
-    image_large: string,
-    image_mobile: string,
-    name: string,
-    price: number,
-    proteins: number,
-    type: string,
-    __v: number,
-    _id: string,
-    unicId: string,
-  }] 
+
 
 function IngredientDetails() {
 
-    const ingredients = useSelector(ingredientDataSelector) as TIngredients;
+    const ingredients = useAppSelector(ingredientDataSelector)
 
     const {id} = useParams();
 
 
-     const selectIngredinet = ingredients.find((item) => item._id === id)
+     const selectIngredinet = ingredients?.find((item) => item._id === id)
 
-   if ( ingredients.length <= 0){
-    return null
-   }else{
+
 
     return (
         <div className={style.ingredient_details_container}>
@@ -60,7 +43,7 @@ function IngredientDetails() {
             </ul>
 
         </div>
-    )}
+    )
 }
 
 export default IngredientDetails

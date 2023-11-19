@@ -1,22 +1,22 @@
 import React, { useState } from 'react'
 import { EmailInput, Input, PasswordInput, Button } from "@ya.praktikum/react-developer-burger-ui-components";
 import styles from './profile-form.module.css'
-import { useDispatch, useSelector } from 'react-redux';
+
 import { changeUserInfo } from '../../services/reducer/changeUserInfo';
 import { userSelector } from '../../services/selectors/userSelector';
-import { TUser } from '../../services/types';
+import { useAppDispatch, useAppSelector } from '../../services/types';
 
 
 
 
 function ProfileForm() {
 
-    const dispatch = useDispatch();
+    const dispatch = useAppDispatch();
 
-    const user = useSelector(userSelector) as TUser
+    const user = useAppSelector(userSelector)
 
-    const [valueName, setValueName] = useState(`${user.name}`)
-    const [valueEmail, setValueEmail] = useState(`${user.email}`)
+    const [valueName, setValueName] = useState(`${user?.name}`)
+    const [valueEmail, setValueEmail] = useState(`${user?.email}`)
     const [valuePassword, setValuePassword] = useState('')
     const inputRef = React.useRef(null);
 
@@ -28,8 +28,8 @@ function ProfileForm() {
     }
 
     function handleCancel() {
-        setValueName(user.name);
-        setValueEmail(user.email)
+        setValueName(user !== null ? user.name : '');
+        setValueEmail(user !== null ?user.email : '')
     }
 
     return (

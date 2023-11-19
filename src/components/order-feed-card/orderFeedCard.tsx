@@ -3,7 +3,6 @@ import styles from './orderFeedCard.module.css'
 import { IOrders, TIngredient, useAppSelector } from '../../services/types'
 import { CurrencyIcon, FormattedDate } from '@ya.praktikum/react-developer-burger-ui-components'
 import { ingredientDataSelector } from '../../services/selectors/ingredientDataSelector'
-import uuid from 'react-uuid'
 
 interface IOrderCard {
     order: IOrders
@@ -12,14 +11,8 @@ interface IOrderCard {
 function OrderFeedCard(order: IOrderCard) {
     const isDataIngredients = useAppSelector(ingredientDataSelector);
 
-    function ignoreUndefined(element: any) {
-        if (typeof element != "undefined") {
-            return element;
-        }
-    }
-
     let ingredientsInOrder = order.order.ingredients.map((i) =>
-        isDataIngredients.find((item) => item._id === i) as TIngredient
+        isDataIngredients?.find((item) => item._id === i) as TIngredient
     )
 
     ingredientsInOrder = ingredientsInOrder.filter((el) => el !== undefined)
@@ -64,14 +57,14 @@ function OrderFeedCard(order: IOrderCard) {
             <div className={styles.orderFeed_numberContainer}>
 
                 <div className={styles.orderIngredientImgs}>
-                    {ingredientsInOrder.slice(0, 4).map((item) => (
-                        <div className={styles.orderIngredientImgContainer} key={uuid()}>
+                    {ingredientsInOrder.slice(0, 4).map((item, index) => (
+                        <div className={styles.orderIngredientImgContainer} key={index}>
                             <img className={styles.orderIngredient__img} src={item?.image} alt={item?.image} />
                         </div>
 
                     ))} 
-                    {ingredientsInOrder.slice(5, 6).map((item) => (
-                        <div className={styles.orderIngredientImgContainerLast} key={uuid()}>
+                    {ingredientsInOrder.slice(5, 6).map((item, index) => (
+                        <div className={styles.orderIngredientImgContainerLast} key={index}>
                             <img className={styles.orderIngredient__img} src={item?.image} alt={item?.image} />
                             <p className={styles.orderIngredient__img_plus}>+{ingredientsInOrder.length - 5}</p>
                         </div>

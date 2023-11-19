@@ -1,24 +1,18 @@
-import React, { useEffect } from 'react'
+import { useEffect } from 'react'
 import styles from './order-feed.module.css'
 import { IOrders, useAppDispatch, useAppSelector } from '../../services/types'
-
 import { connect as connectLiveOrder, disconnect as disconnectLiveOrder } from '../../services/reducer/orderFeedActions';
-
-import { WebsocketStatus } from '../../services/types';
-import { orderFeedSelector } from '../../services/selectors/orderFeedSelector';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import OrderFeedCard from '../../components/order-feed-card/orderFeedCard';
-import uuid from 'react-uuid';
 
 export const LIVE_TABLE_SERVER_URL = 'wss://norma.nomoreparties.space/orders/all';
 
 function OrderFeed() {
 
-
+  const location = useLocation()
   const dispatch = useAppDispatch()
 
   const { orderFeed, status } = useAppSelector(state => state.liveOrderFeed);
-  const isDisconnected = status !== WebsocketStatus.OFFLINE;
 
   const numbersRedyOrder = orderFeed?.orders.filter((el) => el.status === "done")
 
@@ -44,7 +38,7 @@ function OrderFeed() {
 
           {orderFeed?.orders.map((order: IOrders) => (
 
-            <Link to={`/order-feed/${order._id}`} key={order._id} className={styles.ordeFeedLink}>
+            <Link to={`/order-feed/${order.number}`} key={order._id} className={styles.ordeFeedLink} state={{data:order, background: location}}>
 
               <OrderFeedCard order={order} />
 
@@ -65,7 +59,7 @@ function OrderFeed() {
               <p className="text text_type_main-default">Готовы:</p>
 
               <div className={styles.orders__ready}>{numbersRedyOrder?.map((el) => (
-                <div className={styles.feed__numbers} key={uuid()}>{el.number}</div>
+                <div className={styles.feed__numbers} key={el._id}>{el.number}</div>
               ))}</div>
 
 
@@ -77,7 +71,7 @@ function OrderFeed() {
 
               <div className={styles.orders__ready}>
                 {numbersInWorkOrder?.map((el) => (
-                  <div className={styles.feed__numbers} key={uuid()}>{el.number}</div>
+                  <div className={styles.feed__numbers} key={el._id}>{el.number}</div>
                 ))}
               </div>
 

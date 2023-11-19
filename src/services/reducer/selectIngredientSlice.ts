@@ -5,7 +5,7 @@ type SliceState = {
     selectIngredient: TIngredient | null
 }
 
-const initialState: SliceState = {
+ export const initialState: SliceState = {
     selectIngredient: null
 }
 

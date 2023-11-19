@@ -7,14 +7,20 @@ export const fetchIngredientData = createAsyncThunk(
     async (_, thunkApi) => {
         try {
 
-            const res = await fetch(`${baseUrl}/ingredients`)
+            const res = await fetch(`${baseUrl}/ingredients`, {
+                method: 'GET',
+                headers: {
+                    "Content-Type": "application/json",
+
+                },
+            })
 
             const responseData = await checkResponse(res)
 
             return thunkApi.fulfillWithValue(responseData.data)
         }
         catch (err) {
-             return thunkApi.rejectWithValue('Ошибка')
+            return thunkApi.rejectWithValue(err || 'Ошибка при получении данных')
         }
     }
 

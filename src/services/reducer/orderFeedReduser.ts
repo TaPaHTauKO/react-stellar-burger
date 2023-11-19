@@ -1,7 +1,7 @@
 
 import { createReducer } from '@reduxjs/toolkit'
 import { wsOpen, wsClose, wsMessage, wsError, wsConnecting } from "./orderFeedActions";
-import { IOrders, LiveOrder, WebsocketStatus } from '../types';
+import { LiveOrder, WebsocketStatus } from '../types';
 
 export type LiveOrderStore = {
     status: WebsocketStatus,
