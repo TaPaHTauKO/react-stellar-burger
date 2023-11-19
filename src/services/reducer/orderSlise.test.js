@@ -1,12 +1,7 @@
 import { ingredientsArray } from './constructorIngredientSlice.test'
 import orderReduser from './orderSlise'
+import { initialState } from './orderSlise'
 
-const initState = {
-    order: null,
-    orderNumber: '',
-    isLoading: false,
-    error: ''
-}
 
 const orderFromServer = {
     name: "Space флюоресцентный бургер",
@@ -18,10 +13,11 @@ const orderFromServer = {
 
 describe('Запрос номера заказа', () => {
     test('запрос данных', () => {
-        expect(orderReduser(initState, ({ type: 'orderQuery/post/pending' }))).toEqual({
+        expect(orderReduser(initialState, ({ type: 'orderQuery/post/pending' }))).toEqual({
             order: null,
             orderNumber: '',
             isLoading: true,
+            ingredientsNumbers: null,
             error: ''
         })
         expect(orderReduser(undefined, ({ type: 'orderQuery/post/pending' }))).toEqual({
@@ -33,18 +29,20 @@ describe('Запрос номера заказа', () => {
         })
     })
     test('получение данных', () => {
-        expect(orderReduser(initState, ({ type: 'orderQuery/post/fulfilled', payload: orderFromServer }))).toEqual({
+        expect(orderReduser(initialState, ({ type: 'orderQuery/post/fulfilled', payload: orderFromServer }))).toEqual({
             order: null,
             orderNumber: orderFromServer.order.number,
             isLoading: false,
+            ingredientsNumbers: null,
             error: ''
         })
     })
     test('ошибка', () => {
-        expect(orderReduser(initState, ({ type: 'orderQuery/post/rejected', payload: "error" }))).toEqual({
+        expect(orderReduser(initialState, ({ type: 'orderQuery/post/rejected', payload: "error" }))).toEqual({
             order: null,
             orderNumber: '',
             isLoading: false,
+            ingredientsNumbers: null,
             error: 'error'
         })
     })

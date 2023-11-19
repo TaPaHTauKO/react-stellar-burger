@@ -1,8 +1,5 @@
 import selectIngredientReduser, { selectIngredient } from './selectIngredientSlice'
-
-const initState = {
-    selectIngredient: []
-}
+import { initialState } from './selectIngredientSlice'
 
 export const ingredientWithUuid = {
     "__v": 0,
@@ -28,7 +25,7 @@ describe('Тест конструктора', () => {
         })
     })
     test('выбор ингредиента', () => {
-        expect(selectIngredientReduser(initState, selectIngredient(ingredientWithUuid))).toEqual({
+        expect(selectIngredientReduser(initialState, selectIngredient(ingredientWithUuid))).toEqual({
             selectIngredient: ingredientWithUuid
         })
     })

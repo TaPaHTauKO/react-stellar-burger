@@ -15,7 +15,7 @@ type SliceState = {
     isForgot: boolean,
 }
 
-const initialState: SliceState = {
+export const initialState: SliceState = {
     user: null,
     error: '' ,
     isLoading: false,

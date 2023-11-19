@@ -6,7 +6,7 @@ type SliceState = {
     ingredientInBurger: Array<TIngredient>
 }
 
-const initialState: SliceState = {
+export const initialState: SliceState = {
     ingredientInBurger: []
 }
 

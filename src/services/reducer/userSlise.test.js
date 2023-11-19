@@ -1,13 +1,7 @@
 import { logIn } from './logIn'
 import userReduser, { setForgotPass } from './userSlise'
+import { initialState } from './userSlise'
 
-const initState = {
-    user: null,
-    error: '',
-    isLoading: false,
-    isAuth: false,
-    isForgot: false,
-}
 
 const userRes = {
     user: {
@@ -25,7 +19,7 @@ const tokens = {
 
 describe('Запрос юзера', () => {
     test('запрос данных', () => {
-        expect(userReduser(initState, ({ type: 'userRegistration/post/pending' }))).toEqual({
+        expect(userReduser(initialState, ({ type: 'userRegistration/post/pending' }))).toEqual({
             user: null,
             error: '',
             isLoading: true,
@@ -41,7 +35,7 @@ describe('Запрос юзера', () => {
         })
     })
     test('получение данных', () => {
-        expect(userReduser(initState, ({ type: 'userRegistration/post/fulfilled', payload: userRes }))).toEqual({
+        expect(userReduser(initialState, ({ type: 'userRegistration/post/fulfilled', payload: userRes }))).toEqual({
             user: userRes.user,
             error: '',
             isLoading: false,
@@ -50,7 +44,7 @@ describe('Запрос юзера', () => {
         })
     })
     test('ошибка', () => {
-        expect(userReduser(initState, ({ type: 'userRegistration/post/rejected', payload: "error" }))).toEqual({
+        expect(userReduser(initialState, ({ type: 'userRegistration/post/rejected', payload: "error" }))).toEqual({
             user: null,
             error: 'error',
             isLoading: false,
@@ -62,7 +56,7 @@ describe('Запрос юзера', () => {
 })
 describe('Запрос входа', () => {
     test('запрос данных', () => {
-        expect(userReduser(initState, ({ type: 'logIn/post/pending' }))).toEqual({
+        expect(userReduser(initialState, ({ type: 'logIn/post/pending' }))).toEqual({
             user: null,
             error: '',
             isLoading: true,
@@ -78,7 +72,7 @@ describe('Запрос входа', () => {
         })
     })
     test('получение данных', () => {
-        expect(userReduser(initState, ({ type: 'logIn/post/fulfilled', payload: userRes }))).toEqual({
+        expect(userReduser(initialState, ({ type: 'logIn/post/fulfilled', payload: userRes }))).toEqual({
             user: userRes.user,
             error: '',
             isLoading: false,
@@ -87,7 +81,7 @@ describe('Запрос входа', () => {
         })
     })
     test('ошибка', () => {
-        expect(userReduser(initState, ({ type: 'logIn/post/rejected', payload: "error" }))).toEqual({
+        expect(userReduser(initialState, ({ type: 'logIn/post/rejected', payload: "error" }))).toEqual({
             user: null,
             error: 'error',
             isLoading: false,
@@ -100,7 +94,7 @@ describe('Запрос входа', () => {
 
 describe('Запрос логина', () => {
     test('запрос данных', () => {
-        expect(userReduser(initState, ({ type: 'getUser/get/pending' }))).toEqual({
+        expect(userReduser(initialState, ({ type: 'getUser/get/pending' }))).toEqual({
             user: null,
             error: '',
             isLoading: true,
@@ -116,7 +110,7 @@ describe('Запрос логина', () => {
         })
     })
     test('получение данных', () => {
-        expect(userReduser(initState, ({ type: 'getUser/get/fulfilled', payload: userRes }))).toEqual({
+        expect(userReduser(initialState, ({ type: 'getUser/get/fulfilled', payload: userRes }))).toEqual({
             user: userRes.user,
             error: '',
             isLoading: false,
@@ -125,7 +119,7 @@ describe('Запрос логина', () => {
         })
     })
     test('ошибка', () => {
-        expect(userReduser(initState, ({ type: 'getUser/get/rejected', payload: "error" }))).toEqual({
+        expect(userReduser(initialState, ({ type: 'getUser/get/rejected', payload: "error" }))).toEqual({
             user: null,
             error: 'error',
             isLoading: false,
@@ -138,7 +132,7 @@ describe('Запрос логина', () => {
 
 describe('Запрос токена', () => {
     test('запрос данных', () => {
-        expect(userReduser(initState, ({ type: 'getAccesToken/post/pending' }))).toEqual({
+        expect(userReduser(initialState, ({ type: 'getAccesToken/post/pending' }))).toEqual({
             user: null,
             error: '',
             isLoading: true,
@@ -154,7 +148,7 @@ describe('Запрос токена', () => {
         })
     })
     test('получение данных', () => {
-        expect(userReduser(initState, ({ type: 'getAccesToken/post/fulfilled', payload: tokens }))).toEqual({
+        expect(userReduser(initialState, ({ type: 'getAccesToken/post/fulfilled', payload: tokens }))).toEqual({
             user: null,
             error: '',
             isLoading: false,
@@ -163,7 +157,7 @@ describe('Запрос токена', () => {
         })
     })
     test('ошибка', () => {
-        expect(userReduser(initState, ({ type: 'getUser/get/rejected', payload: "error" }))).toEqual({
+        expect(userReduser(initialState, ({ type: 'getUser/get/rejected', payload: "error" }))).toEqual({
             user: null,
             error: 'error',
             isLoading: false,
@@ -176,7 +170,7 @@ describe('Запрос токена', () => {
 
 describe('Запрос выхода', () => {
     test('запрос данных', () => {
-        expect(userReduser(initState, ({ type: 'logOut/post/pending' }))).toEqual({
+        expect(userReduser(initialState, ({ type: 'logOut/post/pending' }))).toEqual({
             user: null,
             error: '',
             isLoading: true,
@@ -192,7 +186,7 @@ describe('Запрос выхода', () => {
         })
     })
     test('получение данных', () => {
-        expect(userReduser(initState, ({ type: 'logOut/post/fulfilled' }))).toEqual({
+        expect(userReduser(initialState, ({ type: 'logOut/post/fulfilled' }))).toEqual({
             user: null,
             error: '',
             isLoading: false,
@@ -201,7 +195,7 @@ describe('Запрос выхода', () => {
         })
     })
     test('ошибка', () => {
-        expect(userReduser(initState, ({ type: 'getUser/get/rejected', payload: "error" }))).toEqual({
+        expect(userReduser(initialState, ({ type: 'getUser/get/rejected', payload: "error" }))).toEqual({
             user: null,
             error: 'error',
             isLoading: false,
@@ -214,7 +208,7 @@ describe('Запрос выхода', () => {
 
 describe('Запрос изменения данных', () => {
     test('запрос данных', () => {
-        expect(userReduser(initState, ({ type: 'changeUserInfo/path/pending' }))).toEqual({
+        expect(userReduser(initialState, ({ type: 'changeUserInfo/path/pending' }))).toEqual({
             user: null,
             error: '',
             isLoading: true,
@@ -230,7 +224,7 @@ describe('Запрос изменения данных', () => {
         })
     })
     test('получение данных', () => {
-        expect(userReduser(initState, ({ type: 'changeUserInfo/path/fulfilled', payload: userRes  }))).toEqual({
+        expect(userReduser(initialState, ({ type: 'changeUserInfo/path/fulfilled', payload: userRes  }))).toEqual({
             user: userRes.user,
             error: '',
             isLoading: false,
@@ -239,7 +233,7 @@ describe('Запрос изменения данных', () => {
         })
     })
     test('ошибка', () => {
-        expect(userReduser(initState, ({ type: 'changeUserInfo/path/rejected', payload: "error" }))).toEqual({
+        expect(userReduser(initialState, ({ type: 'changeUserInfo/path/rejected', payload: "error" }))).toEqual({
             user: null,
             error: 'error',
             isLoading: false,
@@ -253,7 +247,7 @@ describe('Запрос изменения данных', () => {
 describe('Запрос удаления токенов', () => {
 
     test('ошибка', () => {
-        expect(userReduser(initState, (setForgotPass()))).toEqual({
+        expect(userReduser(initialState, (setForgotPass()))).toEqual({
             user: null,
             error: '',
             isLoading: false,

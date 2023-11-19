@@ -12,7 +12,7 @@ type SliseState = {
 }
 
 
-const initialState: SliseState = {
+export const initialState: SliseState = {
     order: null,
     orderNumber: '',
     isLoading: false,

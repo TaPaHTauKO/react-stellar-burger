@@ -9,7 +9,7 @@ type SliceState = {
     error: string | unknown
 }
 
-const initialState: SliceState = {
+ export const initialState: SliceState = {
     ingredientData: null,
     isLoading: false,
     error: '',

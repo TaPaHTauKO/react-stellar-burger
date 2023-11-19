@@ -88,12 +88,16 @@ function App() {
           <Route
             path="/profile/orders/:id"
             element={
-              <Modal
-                closeModalCb={handleCloseModal}
-                children={<OrderFeedSingle />}
-              ></Modal>
+              <OnlyAuth
+                component={
+                  <Modal
+                    closeModalCb={handleCloseModal}
+                    children={<OrderFeedSingle />}
+                  ></Modal>
+                }
+              />
             }
-          />
+          /> 
 
           <Route
             path="/order"

@@ -2,11 +2,8 @@ import * as uuid from 'uuid';
 import constructorIngredientReduser, { addIngredient, clearIngredient, deleteIngredient, sortIngredients } from './constructorIngredientSlise'
 import * as utils from '../../utils/utils'
 import { ingredientWithUuid } from './selectIngredientSlice.test';
+import { initialState } from './constructorIngredientSlise'
 
-
-const initState = {
-    ingredientInBurger: []
-}
 
 export const ingredientsArray = [
     {
@@ -95,7 +92,7 @@ describe('Тест конструктора', () => {
     })
     test('добавление ингредиента', () => {
         jest.spyOn(utils, 'idGenerator').mockReturnValue('4f34e8c3-6003-dcb5-d21b-ee5868db8376')
-        expect(constructorIngredientReduser(initState, addIngredient(ingredient))).toEqual({
+        expect(constructorIngredientReduser(initialState, addIngredient(ingredient))).toEqual({
             ingredientInBurger: [ingredientWithUuid]
         })
     })
