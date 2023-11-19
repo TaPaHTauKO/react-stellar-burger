@@ -1,6 +1,5 @@
 import { logIn } from './logIn'
-import userReduser, { setForgotPass } from './userSlise'
-import { initialState } from './userSlise'
+import userReduser, { setForgotPass, initialState } from './userSlise'
 
 
 const userRes = {

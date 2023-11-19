@@ -1,6 +1,5 @@
 import { ingredientsArray } from './constructorIngredientSlice.test'
-import orderReduser from './orderSlise'
-import { initialState } from './orderSlise'
+import orderReduser, { initialState } from './orderSlise'
 
 
 const orderFromServer = {

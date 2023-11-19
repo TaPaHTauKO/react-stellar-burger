@@ -29,6 +29,7 @@ describe('Тест приложения', () => {
 
         cy.get(orderLink).should("exist");
         cy.get(orderLink).click();
+        cy.wait(17000)
 
         cy.get(closeIcon).should("exist");
         cy.get(closeIcon).click();

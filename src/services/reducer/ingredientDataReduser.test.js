@@ -1,6 +1,5 @@
-import { ingredientsArray } from './constructorIngredientSlice.test'
+import { ingredientsArray, initialState } from './constructorIngredientSlice.test'
 import ingredientDataReduser from './ingredientDataSlice'
-import {initialState} from './ingredientDataSlice'
 
 
 describe('Запрос ингредиентов', () => {

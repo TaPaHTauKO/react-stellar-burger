@@ -1,5 +1,4 @@
-import selectIngredientReduser, { selectIngredient } from './selectIngredientSlice'
-import { initialState } from './selectIngredientSlice'
+import selectIngredientReduser, { selectIngredient,initialState } from './selectIngredientSlice'
 
 export const ingredientWithUuid = {
     "__v": 0,

@@ -1,8 +1,7 @@
 import * as uuid from 'uuid';
-import constructorIngredientReduser, { addIngredient, clearIngredient, deleteIngredient, sortIngredients } from './constructorIngredientSlise'
+import constructorIngredientReduser, { addIngredient, clearIngredient, deleteIngredient, sortIngredients, initialState } from './constructorIngredientSlise'
 import * as utils from '../../utils/utils'
 import { ingredientWithUuid } from './selectIngredientSlice.test';
-import { initialState } from './constructorIngredientSlise'
 
 
 export const ingredientsArray = [
